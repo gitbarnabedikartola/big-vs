@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="1920"
+   height="1080"
+   viewBox="0 0 507.99999 285.75"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14, custom)"
+   sodipodi:docname="disclaimer.svg"
+   inkscape:export-filename="disclaimer.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.23338839"
+     inkscape:cx="302.07158"
+     inkscape:cy="629.85138"
+     inkscape:window-width="1494"
+     inkscape:window-height="870"
+     inkscape:window-x="1280"
+     inkscape:window-y="30"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#000000;fill-rule:evenodd;stroke:#000000;stroke-width:2;stroke-linejoin:round;stroke-opacity:1"
+       id="rect111"
+       width="508"
+       height="285.75"
+       x="0"
+       y="0"
+       ry="0.77187359" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:19.7556px;line-height:1.25;font-family:Lato;-inkscape-font-specification:'Lato Bold';text-align:center;text-anchor:middle;white-space:pre;inline-size:474.868;display:inline;fill:#ff0000;stroke-width:0.264583"
+       x="281.29343"
+       y="45.478397"
+       id="text167"
+       transform="translate(-27.376936,-8.1723984)"><tspan
+         x="281.29343"
+         y="45.478397"
+         id="tspan982">Disclaimer
+</tspan><tspan
+         x="281.29343"
+         y="70.172898"
+         id="tspan984">
+</tspan><tspan
+         x="281.29343"
+         y="94.867398"
+         id="tspan986">We like and support all Linux distributions. This video<tspan
+   y="94.867398"
+   id="tspan988"> </tspan></tspan><tspan
+         x="281.29343"
+         y="119.5619"
+         id="tspan990">was born from benchmarks between BigLinux and<tspan
+   y="119.5619"
+   id="tspan992"> </tspan></tspan><tspan
+         x="281.29343"
+         y="144.25641"
+         id="tspan994">other distributions in order to compare.
+</tspan><tspan
+         x="281.29343"
+         y="168.95091"
+         id="tspan996">
+</tspan><tspan
+         x="281.29343"
+         y="193.64541"
+         id="tspan998">We just did it in a different way, referring to a great<tspan
+   y="193.64541"
+   id="tspan1000"> </tspan></tspan><tspan
+         x="281.29343"
+         y="218.33992"
+         id="tspan1002">classic game that we developers are very fond of,<tspan
+   y="218.33992"
+   id="tspan1004"> </tspan></tspan><tspan
+         x="281.29343"
+         y="243.03442"
+         id="tspan1006">aiming to avoid the standard benchmark mode,<tspan
+   y="243.03442"
+   id="tspan1008"> </tspan></tspan><tspan
+         x="281.29343"
+         y="267.72892"
+         id="tspan1010">making it more fun.</tspan></text>
+  </g>
+</svg>
