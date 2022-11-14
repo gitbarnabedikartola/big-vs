@@ -3,14 +3,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-release:
+  prepare-release:
     runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        KERNEL: ${{ env.MATRIX }}
-        
     steps:
-      - name: Frames
+      # - id: time
+      #   uses: nanzm/get-time-action@v1.1
+      #   with:
+      #     format: 'YYYYMMDDHHmm'
+          
+      - id: frames
         shell: bash -O extglob {0}
         run: |
           #frame inicial
@@ -33,6 +34,41 @@ jobs:
               matrix="${matrix}, $var"
               echo "MATRIX=$matrix" >> $GITHUB_ENV
           done
+          
+    outputs:
+      release_tag: ${{ env.MATRIX }}
+      
+  build-release:
+    runs-on: ubuntu-20.04
+    needs: [prepare-release]
+    strategy:
+      matrix:
+        KERNEL: ${{ env.MATRIX }}
+        
+    # steps:
+    #   - name: Frames
+    #     shell: bash -O extglob {0}
+    #     run: |
+    #       #frame inicial
+    #       startframe=0
+    #       #frame final
+    #       endframe=3000
+    #       #numero de divisões do projeto
+    #       divisor=3
+    # 
+    #       #numero total de frames do projeto
+    #       totalframes=$["$endframe" - "$startframe"]
+    #       #numero de frames por seguimento 
+    #       xframe=$["$totalframes" / "$divisor"]
+    # 
+    #       #gerar lista com os numeros de frames iniciais e finais
+    #       for (( x=1; x<="$divisor"; x++ )); do  
+    #           fend=$["$xframe" * "$x"]
+    #           fstart=$["$fend" - "$xframe" + "1"]
+    #           var="-s $fstart -e $fend"
+    #           matrix="${matrix}, $var"
+    #           echo "MATRIX=$matrix" >> $GITHUB_ENV
+    #       done
       
       - name: Make
         uses: gitbarnabedikartola/big-vs@main
