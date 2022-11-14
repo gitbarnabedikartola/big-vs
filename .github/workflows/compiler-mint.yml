@@ -43,7 +43,7 @@ jobs:
     needs: [prepare-release]
     strategy:
       matrix:
-        KERNEL: ${{ env.MATRIX }}
+        KERNEL: [ ${{ env.MATRIX }} ]
         
     # steps:
     #   - name: Frames
