@@ -27,7 +27,7 @@ jobs:
               fstart=$["$fend" - "$xframe" + "1"]
               divframes="-s $fstart -e $fend"
               fmake="${fmake}, $divframes"
-              fmakex=$(echo $fmake | sed 's/^, /')
+              fmakex=$(echo $fmake | sed 's/^, //')
               
               
               xx=$["$divisor" - "$x" + "1"]
@@ -37,7 +37,7 @@ jobs:
           # echo "matrix=1" >> $GITHUB_OUTPUT
           # echo "value=['a','b','c']" >> $GITHUB_OUTPUT
           echo "Nmatrix=[$xxxx]" >> $GITHUB_OUTPUT
-          echo "Fmake=[$divframes]" >> $GITHUB_OUTPUT
+          echo "Fmake=[$fmakex]" >> $GITHUB_OUTPUT
   make:
     needs: frames
     runs-on: ubuntu-latest
