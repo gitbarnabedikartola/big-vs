@@ -50,7 +50,7 @@ jobs:
         # BRANCH: [stable]
         # SCOPE: [full]
         #EXTRAREPO: []
-        KERNEL: [510, 515, 60]
+        KERNEL: [${{ steps.frames.outputs.matrix }}]
         #KERNEL: [515]
         
     steps:
