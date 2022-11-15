@@ -53,7 +53,8 @@ jobs:
         # BRANCH: [stable]
         # SCOPE: [full]
         #EXTRAREPO: []
-        KERNEL: [3, 2, 1]
+        # KERNEL: [3, 2, 1]
+        KERNEL: ${{ needs.prepare-release.outputs.release_tag }}
         #KERNEL: [515]
         
     steps:
@@ -90,7 +91,7 @@ jobs:
       - name: Prepare Files to Upload
         shell: bash -O extglob {0}
         run: |
-          echo "${{ env.matrix }}"
+          echo "${{ needs.prepare-release.outputs.release_tag }}"
 #           ls -lh
 #           mkdir iso
 #           for i in *.iso *.torrent *.pkgs *.md5; do
