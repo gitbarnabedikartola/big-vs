@@ -22,7 +22,7 @@ jobs:
         # BRANCH: [stable]
         # SCOPE: [full]
         #EXTRAREPO: []
-        KERNEL: ${{ env.matrix }}
+        KERNEL: ${{ divframes.env }}
         #KERNEL: [515]
     # outputs:
       # release_tag: ${{ steps.frames.outputs.matrix }}    
@@ -30,7 +30,7 @@ jobs:
       - id: frames
         shell: bash -O extglob {0}
         run: |
-          echo "matrix=[3, 2, 1]" >> $GITHUB_ENV
+          echo "divframes=[3, 2, 1]" >> $GITHUB_ENV
         
     
       - name: Build and Upload GitHub
