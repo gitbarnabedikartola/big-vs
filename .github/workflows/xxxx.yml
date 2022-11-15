@@ -36,10 +36,10 @@ jobs:
           # echo "value=['a','b','c']" >> $GITHUB_OUTPUT
           echo "Nmatrix=[$xxxx]" >> $GITHUB_OUTPUT
   make:
-    needs: job1
+    needs: frames
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        Nworks: ${{fromJSON(needs.job1.outputs.fmatrix)}}
+        Nworks: ${{fromJSON(needs.frames.outputs.fmatrix)}}
     steps:
       - run: echo "${{ matrix.Nworks }}"
