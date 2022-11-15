@@ -40,7 +40,7 @@ jobs:
           #cena a ser renderizada, em branco renderiza a primeira cena
           scene: 03-montagem
           #preencher se quiser renderizar só uma parte, deixar em branco para renderizar os frames do .blend
-          startframe: 1
+          startframe: 0
           endframe: 99
         
       - name: push to git releases
