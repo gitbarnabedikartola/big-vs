@@ -3,11 +3,15 @@ name: 'Compiler Action'
 inputs:
   workernumber:
     required: true
-  divframes: 
-    required: true
   blenderversion: 
     required: true
-
+  blenderfile
+    required: true
+  startframe:
+    required: false
+  endframe:
+    required: false
+    
 runs:
   using: "composite"
   steps:
@@ -15,42 +19,36 @@ runs:
       shell:
       run: |
         echo "WorkerNumber=${{ inputs.workernumber }}"
+        echo "blenderversion=${{ inputs.blenderversion }}"
+        echo "blenderfile=${{ inputs.blenderfile }}"
+        echo "startframe=${{ inputs.startframe }}"
+        echo "endframe=${{ inputs.endframe }}"
         
-#     -name: frames
-#       shell:
-#       run: |
-#         #frame inicial
-#           startframe=0
-#           
-#           #frame final
-#           endframe=735
-#           # endframe=$(blender -b big-vs-ubuntu.blend -S 03-montagem -P frames.py | grep frames | cut -d "=" -f2)
-#           
-#           #numero de divisões do projeto
-#           divisor=10
-#           
-#           #numero total de frames do projeto
-#           totalframes=$["$endframe" - "$startframe"]
-#           #numero de frames por seguimento 
-#           xframe=$["$totalframes" / "$divisor"]
-#           #gerar lista com os numeros de frames iniciais e finais
-#           for (( x=1; x<="$divisor"; x++ )); do  
-#               fend=$["$xframe" * "$x"]
-#               fstart=$["$fend" - "$xframe" + "1"]
-#               divframes="-s $fstart -e $fend"
-#               fmake="${fmake}, $divframes"
-#               fmakex=$(echo $fmake | sed 's/^, //')
-#               
-#               
-#               xx=$["$divisor" - "$x" + "1"]
-#               xxx="$xxx,'$xx'"
-#               xxxx=$(echo "$xxx" | sed 's/^,//')
-#           done
-#           # echo "matrix=1" >> $GITHUB_OUTPUT
-#           # echo "value=['a','b','c']" >> $GITHUB_OUTPUT
-#           echo "Nmatrix=[$xxxx]" >> $GITHUB_OUTPUT
-#           echo "Fmake=$fmakex" >> $GITHUB_OUTPUT
-#         
+    -name: frames
+      shell:
+      run: |
+        #frame inicial
+          startframe=0
+          #frame final
+          endframe=735
+          # endframe=$(blender -b ${{ inputs.blenderfile }} -S 03-montagem -P frames.py | grep frames | cut -d "=" -f2)
+          #numero de divisões do projeto
+          divisor=10
+          
+          #numero total de frames do projeto
+          totalframes=$["${{ inputs.endframe }}" - "${{ inputs.startframe }}"]
+          #numero de frames por seguimento 
+          xframe=$["$totalframes" / "${{ inputs.workernumber }}"]
+          #gerar lista com os numeros de frames iniciais e finais
+          for (( x=1; x<="${{ inputs.workernumber }}"; x++ )); do  
+              fend=$["$xframe" * "$x"]
+              fstart=$["$fend" - "$xframe" + "1"]
+              divframes="-s $fstart -e $fend"
+              fmake="${fmake}, ${{ inputs.workernumber }}"
+              fmakex=$(echo $fmake | sed 's/^, //')
+          done
+          echo "Fmake=$fmakex"
+        
 #     - name: get blender
 #       shell: bash
 #       run: |
@@ -112,7 +110,7 @@ runs:
 #         #awk -F\, '{print $(echo ${{ inputs.workernumber }})}'
 #         echo "$intervalo"
 #         
-#         blender-${{ inputs.blenderversion }}-linux-x64/blender -b big-vs-ubuntu.blend -o // -S 03-montagem $intervalo -a
+#         blender-${{ inputs.blenderversion }}-linux-x64/blender -b ${{ inputs.blenderfile }} -o // -S 03-montagem $intervalo -a
 #         
 #         ls -lh
 #         
