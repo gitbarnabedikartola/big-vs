@@ -96,7 +96,7 @@ runs:
       shell: bash
       run: |
         #Get_Blender
-        wget https://mirror.clarkson.edu/blender/release/Blender3.3/blender-3.3.1-linux-x64.tar.xz
+        wget -cq https://mirror.clarkson.edu/blender/release/Blender3.3/blender-3.3.1-linux-x64.tar.xz
         tar -xvf blender-3.3.1-linux-x64.tar.xz
     
     - name: Get_Dependencies
@@ -118,7 +118,7 @@ runs:
         )
         pushd render-animacao
         for i in "${listanimacao[@]}"; do
-          wget -c https://github.com/gitbarnabedikartola/big-vs/releases/download/render-animacao/$i
+          wget -cq https://github.com/gitbarnabedikartola/big-vs/releases/download/render-animacao/$i
         done
         ls -lh
         popd
@@ -131,7 +131,7 @@ runs:
         )
         pushd capturas
         for i in "${listacapturas[@]}"; do
-          wget -c https://github.com/gitbarnabedikartola/big-vs/releases/download/render-animacao/$i
+          wget -cq https://github.com/gitbarnabedikartola/big-vs/releases/download/render-animacao/$i
         done
         ls -lh
         popd
