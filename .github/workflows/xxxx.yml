@@ -15,7 +15,7 @@ jobs:
           startframe=0
           
           #frame final
-          endframe=99
+          endframe=735
           
           #numero de divisões do projeto
           divisor=3
