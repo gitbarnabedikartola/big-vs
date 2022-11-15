@@ -77,7 +77,7 @@ runs:
         
         ls -lh
         
-        echo ${{ github.repository }}
+#         echo ${{ github.repository }}
         
 #     # Tmate ##
 #     - name: Setup TMATE Session
