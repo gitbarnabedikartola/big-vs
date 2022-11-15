@@ -3,15 +3,13 @@ on:
   workflow_dispatch:
   
 jobs:
-  # prepare-release:
-  #   runs-on: ubuntu-20.04
-  #   steps:
-  #     - id: time
-  #       uses: nanzm/get-time-action@v1.1
-  #       with:
-  #         format: 'YYYYMMDDHHmm'
-  #   outputs:
-  #     release_tag: ${{ steps.time.outputs.time }}
+  prepare-release:
+    runs-on: ubuntu-20.04
+    steps:
+      - id: time
+        shell: bash -O extglob {0}
+        run: |
+          echo "divframes=[3, 2, 1]" >> $GITHUB_ENV
       
   build-release:
     runs-on: ubuntu-20.04
@@ -27,10 +25,10 @@ jobs:
     # outputs:
       # release_tag: ${{ steps.frames.outputs.matrix }}    
     steps:
-      - id: frames
-        shell: bash -O extglob {0}
-        run: |
-          echo "divframes=[3, 2, 1]" >> $GITHUB_ENV
+      # - id: frames
+      #   shell: bash -O extglob {0}
+      #   run: |
+      #     echo "divframes=[3, 2, 1]" >> $GITHUB_ENV
         
     
       - name: Build and Upload GitHub
