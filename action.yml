@@ -24,7 +24,7 @@ runs:
         echo "startframe=${{ inputs.startframe }}"
         echo "endframe=${{ inputs.endframe }}"
         
-    -name: frames
+    - name: frames
       shell:
       run: |
         #frame inicial
