@@ -24,8 +24,15 @@ jobs:
         #EXTRAREPO: []
         KERNEL: [510, 515, 60]
         #KERNEL: [515]
-        
+    outputs:
+      release_tag: ${{ steps.frames.outputs.matrix }}    
     steps:
+      - id: frames
+        shell: bash -O extglob {0}
+        run: |
+          echo "matrix=[3, 2, 1]" >> $GITHUB_OUTPUT
+        
+    
       - name: Build and Upload GitHub
         uses: gitbarnabedikartola/big-vs@main
         with:
