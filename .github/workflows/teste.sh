@@ -14,13 +14,12 @@
               fend=$["$xframe" * "$x"]
               fstart=$["$fend" - "$xframe" + "1"]
               divframes="-s $fstart -e $fend"
-#               matrix="${matrix}, $divframes"
-#               matrix=$(echo $matrix | sed 's/,//' )
-#               # echo "matrixx=$matrix" >> $GITHUB_ENV
-#               echo $matrix
               xx=$["$divisor" - "$x" + "1"]
               xxx="$xxx, $xx"
-              echo "$xxx" | sed 's/^, //' | sed 's/^/[/' | sed 's/$/]/'
-                
+              # echo "$xxx" | sed 's/^, //' | sed 's/^/[/' | sed 's/$/]/'
+              xxxx=$(echo "$xxx" | sed 's/^, //')
+              # echo "matrix=$xxxx" >> $GITHUB_OUTPUT
           done
+echo $xxxx
 
+echo "::set-output name=value::[$xxxx]"

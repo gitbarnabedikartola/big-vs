@@ -41,8 +41,10 @@ jobs:
               xxx="$xxx, $xx"
               # echo "$xxx" | sed 's/^, //' | sed 's/^/[/' | sed 's/$/]/'
               xxxx=$(echo "$xxx" | sed 's/^, //' | sed 's/^/[/' | sed 's/$/]/')
-              echo "matrix=$xxxx" >> $GITHUB_OUTPUT
+              # echo "matrix=$xxxx" >> $GITHUB_OUTPUT
+              # echo "::set-output name=value::[$xxx]"
           done
+          echo "::set-output name=matrix::[$xxxx]"
         
   build-release:
     runs-on: ubuntu-20.04
