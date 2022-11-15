@@ -50,5 +50,5 @@ jobs:
           echo "${{ needs.frames.outputs.Fmake }}"
           intervalo=$(echo "${{ needs.frames.outputs.Fmake }}" | cut -d "," -f${{ matrix.Nworks }})
           #awk -F\, '{print $(echo ${{ matrix.Nworks }})}'
-          echo "$intervalo" | awk -F\, '{print $(echo ${{ matrix.Nworks }})}'
+          echo "$intervalo"
           
