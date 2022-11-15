@@ -97,7 +97,7 @@ runs:
       run: |
         #Get_Blender
         wget -cq https://mirror.clarkson.edu/blender/release/Blender3.3/blender-3.3.1-linux-x64.tar.xz
-        tar -xvf blender-3.3.1-linux-x64.tar.xz
+        tar -xf blender-3.3.1-linux-x64.tar.xz
     
     - name: Get_Dependencies
       shell: bash
