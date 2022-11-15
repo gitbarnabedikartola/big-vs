@@ -48,7 +48,7 @@ runs:
                 fend=$["$xframe" * "$x"]
                 fstart=$["$fend" - "$xframe" + "1"]
                 divframes="-s $fstart -e $fend"
-                fmake="${fmake}, ${{ inputs.workernumber }}"
+                fmake="${fmake}, $divframes"
                 fmakex=$(echo $fmake | sed 's/^, //')
             done
             echo "Fmake=$fmakex"
