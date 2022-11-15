@@ -9,7 +9,7 @@ jobs:
       - id: time
         shell: bash -O extglob {0}
         run: |
-          echo "divframes=[3, 2, 1]" >> $GITHUB_ENV
+          echo "divframes=1" >> $GITHUB_ENV
       
   build-release:
     runs-on: ubuntu-20.04
