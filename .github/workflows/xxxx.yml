@@ -16,7 +16,7 @@ jobs:
           #frame final
           endframe=3000
           #numero de divisões do projeto
-          divisor=3
+          divisor=10
           #numero total de frames do projeto
           totalframes=$["$endframe" - "$startframe"]
           #numero de frames por seguimento 
