@@ -5,7 +5,7 @@ inputs:
     required: true
   blenderversion: 
     required: true
-  blenderfile
+  blenderfile:
     required: true
   startframe:
     required: false
