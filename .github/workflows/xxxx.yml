@@ -37,7 +37,7 @@ jobs:
           # echo "matrix=1" >> $GITHUB_OUTPUT
           # echo "value=['a','b','c']" >> $GITHUB_OUTPUT
           echo "Nmatrix=[$xxxx]" >> $GITHUB_OUTPUT
-          echo "Fmake=[$fmakex]" >> $GITHUB_OUTPUT
+          echo "Fmake=$fmakex" >> $GITHUB_OUTPUT
   make:
     needs: frames
     runs-on: ubuntu-latest
@@ -48,3 +48,5 @@ jobs:
       - run: |
           echo "${{ matrix.Nworks }}"
           echo "${{ needs.frames.outputs.Fmake }}"
+          intervalo=$(echo ${{ needs.frames.outputs.Fmake }} | awk -F\, '{print $(echo ${{ matrix.Nworks }})}')
+          echo "$intervalo" | awk -F\, '{print $(echo ${{ matrix.Nworks }})}'
