@@ -15,7 +15,7 @@ jobs:
           startframe=0
           
           #frame final
-          endframe=735
+          endframe=99
           
           #numero de divisões do projeto
           divisor=3
@@ -60,12 +60,12 @@ jobs:
         shell: bash
         run: |
           echo ${{ github.repository }}
-      #     ls -lh
-      #     echo ${{ github.token }} | gh auth login --with-token
-      #     #gh release create render --title render --repo gitbarnabedikartola/teste-blender --notes "notas"
-      #     for i in *.mkv; do
-      #       gh release upload renders --repo ${{ github.repository }} --clobber $i
-      #     done
+          ls -lh
+          echo ${{ github.token }} | gh auth login --with-token
+          gh release create renders --title renders --repo ${{ github.repository }} --notes "sempre usados"
+          for i in *.mkv; do
+            gh release upload renders --repo ${{ github.repository }} --clobber $i
+          done
       
       #   ##Tmate ##
       # - name: Setup TMATE Session
