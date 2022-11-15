@@ -39,7 +39,7 @@ jobs:
               xxx="$xxx, $xx"
               echo "$xxx" | sed 's/^, //' | sed 's/^/[/' | sed 's/$/]/'
               xxxx=$(echo "$xxx" | sed 's/^, //' | sed 's/^/[/' | sed 's/$/]/')
-              echo "matrix=$xxxx" >> $GITHUB_ENV
+              echo "matrix=$xxxx" >> $GITHUB_OUTPUT
           done
     outputs:
       release_tag: ${{ steps.frames.outputs.matrix }}
