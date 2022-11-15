@@ -35,6 +35,7 @@ jobs:
           # echo "matrix=1" >> $GITHUB_OUTPUT
           # echo "value=['a','b','c']" >> $GITHUB_OUTPUT
           echo "Nmatrix=[$xxxx]" >> $GITHUB_OUTPUT
+          echo "divframes=[$divframes]" >> $GITHUB_OUTPUT
   make:
     needs: frames
     runs-on: ubuntu-latest
@@ -42,4 +43,6 @@ jobs:
       matrix:
         Nworks: ${{fromJSON(needs.frames.outputs.fmatrix)}}
     steps:
-      - run: echo "${{ matrix.Nworks }}"
+      - run: |
+          echo "${{ matrix.Nworks }}"
+          echo "${{fromJSON(needs.frames.outputs.fmatrix)}}"
