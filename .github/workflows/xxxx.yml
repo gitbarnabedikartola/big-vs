@@ -4,7 +4,7 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.set-frames.outputs.value }}
+      fmatrix: ${{ steps.set-frames.outputs.value }}
     steps:
       - id: set-frames
         # run: echo "::set-output name=value::['a','b','c']"
@@ -38,6 +38,6 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        value: ${{fromJSON(needs.job1.outputs.matrix)}}
+        Nworks: ${{fromJSON(needs.job1.outputs.fmatrix)}}
     steps:
-      - run: echo "${{ matrix.value }}"
+      - run: echo "${{ matrix.Nworks }}"
