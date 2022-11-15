@@ -53,8 +53,8 @@ jobs:
         # BRANCH: [stable]
         # SCOPE: [full]
         #EXTRAREPO: []
-        # KERNEL: [3, 2, 1]
-        KERNEL: ${{ needs.prepare-release.outputs.release_tag }}
+        KERNEL: [3, 2, 1]
+        # KERNEL: ${{ needs.prepare-release.outputs.release_tag }}
         #KERNEL: [515]
         
     steps:
