@@ -30,20 +30,20 @@ jobs:
           for (( x=1; x<="$divisor"; x++ )); do  
               fend=$["$xframe" * "$x"]
               fstart=$["$fend" - "$xframe" + "1"]
-              var="-s $fstart -e $fend"
-              matrix="${matrix}, $var"
-              echo "MATRIX=$matrix" >> $GITHUB_ENV
+              divframes="-s $fstart -e $fend"
+              matrixx="${matrix}, $divframes"
+              echo "matrix=$matrixx" >> $GITHUB_ENV
           done
           
     outputs:
-      release_tag: ${{ env.MATRIX }}
+      release_tag: ${{ steps.frames.outputs.matrix }}
       
   build-release:
     runs-on: ubuntu-20.04
     needs: [prepare-release]
     strategy:
       matrix:
-        KERNEL: [ ${{ env.MATRIX }} ]
+        KERNEL: [ ${{ steps.frames.outputs.matrix }} ]
         
     # steps:
     #   - name: Frames
