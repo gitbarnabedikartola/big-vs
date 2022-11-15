@@ -60,7 +60,6 @@ jobs:
         run: |
           echo ${{ github.token }} | gh auth login --with-token
           gh release create render --title render --repo gitbarnabedikartola/teste-blender --notes "notas"
-          cd teste-blender
           for i in *.mkv; do
             gh release upload render --repo ${{ github.repository }} --clobber $i
           done
