@@ -1,12 +1,9 @@
 name: 'Compiler Action'
 
 inputs:
-  iso-profiles-repo:
-    description: 'iso profiles to clone'
+  workernumber:
     required: false
-    default: 'https://gitlab.manjaro.org/profiles-and-settings/iso-profiles'
-  iso-profiles-branch:
-    description: 'branch of the iso profiles to check out'
+  divframes: 
     required: false
   edition: 
     description: 'name of the iso profile to build'
@@ -140,12 +137,12 @@ runs:
       shell:
       run: |
         #numero de divisões
-        echo "${{ matrix.Nworks }}"
+        echo "${{ inputs.workernumber }}"
         #valores do frames todos jundos e separados por ,
-        echo "${{ needs.frames.outputs.Fmake }}"
+        echo "${{ inputs.divframes }}"
         
-        intervalo=$(echo "${{ needs.frames.outputs.Fmake }}" | cut -d "," -f${{ matrix.Nworks }})
-        #awk -F\, '{print $(echo ${{ matrix.Nworks }})}'
+        intervalo=$(echo "${{ inputs.divframes }}" | cut -d "," -f${{ inputs.workernumber }})
+        #awk -F\, '{print $(echo ${{ inputs.workernumber }})}'
         echo "$intervalo"
         
 #     - id: checkout-iso-profiles

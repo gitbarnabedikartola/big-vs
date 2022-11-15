@@ -47,6 +47,9 @@ jobs:
     steps:
       - name: Make
         uses: gitbarnabedikartola/big-vs@main
+        with:
+          workernumber: ${{ matrix.Nworks }}
+          divframes: ${{ needs.frames.outputs.Fmake }}
         
       # - run: |
       #     echo "${{ matrix.Nworks }}"
