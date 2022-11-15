@@ -131,7 +131,7 @@ runs:
         )
         pushd capturas
         for i in "${listacapturas[@]}"; do
-          wget -cq https://github.com/gitbarnabedikartola/big-vs/releases/download/capturas/$i
+          wget -cq https://github.com/gitbarnabedikartola/big-vs/releases/download/render-animacao/$i
         done
         ls -lh
         popd
