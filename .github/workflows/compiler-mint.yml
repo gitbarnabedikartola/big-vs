@@ -43,7 +43,7 @@ jobs:
     needs: [prepare-release]
     strategy:
       matrix:
-        KERNEL: [ 1000 ]
+        KERNEL: [1000]
         
     # steps:
     #   - name: Frames
