@@ -1,5 +1,7 @@
 name: build
-on: push
+on: 
+  workflow_dispatch:
+  push:
 jobs:
   job1:
     runs-on: ubuntu-latest
@@ -25,14 +27,14 @@ jobs:
               fstart=$["$fend" - "$xframe" + "1"]
               divframes="-s $fstart -e $fend"
               xx=$["$divisor" - "$x" + "1"]
-              xxx="$xxx, $xx"
+              xxx="$xxx,'$xx'"
               # echo "$xxx" | sed 's/^, //' | sed 's/^/[/' | sed 's/$/]/'
-              xxxx=$(echo "$xxx" | sed 's/^, //' | sed 's/^/[/' | sed 's/$/]/')
+              xxxx=$(echo "$xxx" | sed 's/^,//')
               # echo "matrix=$xxxx" >> $GITHUB_OUTPUT
-              # echo "::set-output name=value::[$xxx]"
           done
           # echo "matrix=1" >> $GITHUB_OUTPUT
-          echo "value=['a','b','c']" >> $GITHUB_OUTPUT
+          # echo "value=['a','b','c']" >> $GITHUB_OUTPUT
+          echo "value=[$xxxx]" >> $GITHUB_OUTPUT
   job2:
     needs: job1
     runs-on: ubuntu-latest

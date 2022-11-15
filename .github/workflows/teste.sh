@@ -15,9 +15,9 @@
               fstart=$["$fend" - "$xframe" + "1"]
               divframes="-s $fstart -e $fend"
               xx=$["$divisor" - "$x" + "1"]
-              xxx="$xxx, $xx"
+              xxx="$xxx,'$xx'"
               # echo "$xxx" | sed 's/^, //' | sed 's/^/[/' | sed 's/$/]/'
-              xxxx=$(echo "$xxx" | sed 's/^, //')
+              xxxx=$(echo "$xxx" | sed 's/^,//')
               # echo "matrix=$xxxx" >> $GITHUB_OUTPUT
           done
 echo $xxxx
