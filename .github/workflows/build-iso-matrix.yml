@@ -47,13 +47,13 @@ jobs:
   build-release:
     runs-on: ubuntu-20.04
     needs: [prepare-release]
-    # strategy:
-      # matrix:
+    strategy:
+      matrix:
         # EDITION: [biglinux]
         # BRANCH: [stable]
         # SCOPE: [full]
         #EXTRAREPO: []
-        # KERNEL: ${{ env.matrix }}
+        KERNEL: [3, 2, 1]
         #KERNEL: [515]
         
     steps:
@@ -80,7 +80,7 @@ jobs:
         #   # branch: ${{ matrix.branch }}
         #   # scope: ${{ matrix.scope }}
         #   # version: ${{ steps.time.outputs.time }}
-        #   kernel: ${{ matrix.kernel }}
+          kernel: ${{ matrix.kernel }}
         #   # mesa: ${{ env.MESA }}
         #   # extrarepo: ${{ matrix.extrarepo }}
         #   # code-name: "Sikaris"
