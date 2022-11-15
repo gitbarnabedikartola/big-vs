@@ -13,10 +13,13 @@ jobs:
         run: |
           #frame inicial
           startframe=0
+          
           #frame final
-          endframe=3000
+          endframe=735
+          
           #numero de divisões do projeto
           divisor=3
+          
           #numero total de frames do projeto
           totalframes=$["$endframe" - "$startframe"]
           #numero de frames por seguimento 
@@ -51,10 +54,13 @@ jobs:
           workernumber: ${{ matrix.Nworks }}
           divframes: ${{ needs.frames.outputs.Fmake }}
         
-      # - run: |
-      #     echo "${{ matrix.Nworks }}"
-      #     echo "${{ needs.frames.outputs.Fmake }}"
-      #     intervalo=$(echo "${{ needs.frames.outputs.Fmake }}" | cut -d "," -f${{ matrix.Nworks }})
-      #     #awk -F\, '{print $(echo ${{ matrix.Nworks }})}'
-      #     echo "$intervalo"
+      - name: push to git releases
+        shell: bash
+        run: |
+          echo ${{ github.token }} | gh auth login --with-token
+          gh release create render --title render --repo gitbarnabedikartola/teste-blender --notes "notas"
+          cd teste-blender
+          for i in *.mkv; do
+            gh release upload render --repo ${{ github.repository }} --clobber $i
+          done
           
