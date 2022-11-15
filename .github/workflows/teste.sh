@@ -20,8 +20,7 @@
 #               echo $matrix
               xx=$["$divisor" - "$x" + "1"]
               xxx="$xxx, $xx"
-              echo "$xxx" | sed 's/^, //'
-                
+              echo "$xxx" | sed 's/^, //' | sed 's/^/[/' | sed 's/$/]/'
                 
           done
 

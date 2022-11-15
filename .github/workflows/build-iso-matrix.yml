@@ -37,8 +37,8 @@ jobs:
               divframes="-s $fstart -e $fend"
               xx=$["$divisor" - "$x" + "1"]
               xxx="$xxx, $xx"
-              echo "$xxx" | sed 's/^, //'
-              echo "matrix=$xxx" >> $GITHUB_ENV
+              echo "$xxx" | sed 's/^, //' | sed 's/^/[/' | sed 's/$/]/'
+              echo "matrix=$xxx | sed 's/^, //' | sed 's/^/[/' | sed 's/$/]/'" >> $GITHUB_ENV
           done
     outputs:
       release_tag: ${{ steps.frames.outputs.matrix }}
