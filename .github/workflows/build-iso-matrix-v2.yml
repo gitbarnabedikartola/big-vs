@@ -27,7 +27,7 @@ jobs:
         
     steps:
       - name: Build and Upload GitHub
-        uses: gitbarnabedikartola/big-vs@main@main
+        uses: gitbarnabedikartola/big-vs@main
         with:
           # edition: ${{ matrix.edition }}
           # branch: ${{ matrix.branch }}
