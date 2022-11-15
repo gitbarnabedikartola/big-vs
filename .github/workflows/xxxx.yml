@@ -59,8 +59,9 @@ jobs:
       - name: push to git releases
         shell: bash
         run: |
+          ls -lh
           echo ${{ github.token }} | gh auth login --with-token
-          gh release create render --title render --repo gitbarnabedikartola/teste-blender --notes "notas"
+          #gh release create render --title render --repo gitbarnabedikartola/teste-blender --notes "notas"
           for i in *.mkv; do
             gh release upload render --repo ${{ github.repository }} --clobber $i
           done
