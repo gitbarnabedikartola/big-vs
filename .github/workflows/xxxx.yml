@@ -61,7 +61,7 @@ jobs:
         run: |
           echo ${{ github.repository }}
           ls -lh
-          echo ${{ TOKEN_UPLOAD }} | gh auth login --with-token
+          echo ${{ secrets.TOKEN_UPLOAD }} | gh auth login --with-token
           # gh release create renders --title renders --repo ${{ github.repository }} --notes "sempre usados"
           for i in *.mkv; do
             gh release upload renders --repo ${{ github.repository }} --clobber $i
