@@ -86,10 +86,10 @@ inputs:
     description: 'extra repository to buld package'
     required: false
     
-outputs:
-  file-path:
-    description: "path of the generated iso"
-    value: ${{ steps.image-build.outputs.file-path }}
+# outputs:
+#   file-path:
+#     description: "path of the generated iso"
+#     value: ${{ steps.image-build.outputs.file-path }}
 
 runs:
   using: "composite"
