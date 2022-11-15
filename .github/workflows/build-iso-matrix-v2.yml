@@ -22,7 +22,7 @@ jobs:
         # BRANCH: [stable]
         # SCOPE: [full]
         #EXTRAREPO: []
-        KERNEL: ${{ divframes.env }}
+        KERNEL: ${{ env.divframes }}
         #KERNEL: [515]
     # outputs:
       # release_tag: ${{ steps.frames.outputs.matrix }}    
