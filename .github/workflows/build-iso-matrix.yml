@@ -11,13 +11,13 @@ jobs:
   prepare-release:
     runs-on: ubuntu-20.04
     steps:
-    #   - id: time
-    #     uses: nanzm/get-time-action@v1.1
-    #     with:
-    #       format: 'YYYYMMDDHHmm'
-    # outputs:
-    #   release_tag: ${{ steps.time.outputs.time }}
-    - id: frames
+      - id: time
+        uses: nanzm/get-time-action@v1.1
+        with:
+          format: 'YYYYMMDDHHmm'
+    outputs:
+      release_tag: ${{ steps.time.outputs.time }}
+      - id: frames
         shell: bash -O extglob {0}
         run: |
           #frame inicial
@@ -40,7 +40,7 @@ jobs:
           done
     outputs:
       release_tag: ${{ steps.frames.outputs.matrix }}
-      
+        
   build-release:
     runs-on: ubuntu-20.04
     needs: [prepare-release]
