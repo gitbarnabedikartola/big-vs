@@ -38,7 +38,8 @@ jobs:
               xx=$["$divisor" - "$x" + "1"]
               xxx="$xxx, $xx"
               echo "$xxx" | sed 's/^, //' | sed 's/^/[/' | sed 's/$/]/'
-              echo "matrix=$xxx | sed 's/^, //' | sed 's/^/[/' | sed 's/$/]/'" >> $GITHUB_ENV
+              xxxx=$(echo "$xxx" | sed 's/^, //' | sed 's/^/[/' | sed 's/$/]/')
+              echo "matrix=$xxxx" >> $GITHUB_ENV
           done
     outputs:
       release_tag: ${{ steps.frames.outputs.matrix }}
