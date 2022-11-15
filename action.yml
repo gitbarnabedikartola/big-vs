@@ -26,40 +26,40 @@ runs:
         echo "scene=${{ inputs.scene }}"
         echo "startframe=${{ inputs.startframe }}"
         echo "endframe=${{ inputs.endframe }}"
+          
+    - name: get blender
+      shell: bash
+      run: |
+        #Get_Blender
+        version=3.3.1
+        wget -cq https://mirror.clarkson.edu/blender/release/Blender3.3/blender-3.3.1-linux-x64.tar.xz
+        tar -xf blender-${{ inputs.blenderversion }}-linux-x64.tar.xz
         
     - name: frames
       shell:
+      env:
+        startframe: ${{ inputs.startframe }}
+        endframe: ${{ inputs.endframe }}
+        divisor: ${{ inputs.workernumber }}
       run: |
-        #frame inicial
-          startframe=0
-          #frame final
-          endframe=735
-          # endframe=$(blender -b ${{ inputs.blenderfile }} -S ${{ inputs.scene }} -P frames.py | grep frames | cut -d "=" -f2)
-          #numero de divisões do projeto
-          divisor=10
-          
-          if [ -n "${{ inputs.startframe }}" -a -n "${{ inputs.endframe }}" ]; then
-            #numero total de frames do projeto
-            totalframes=$["${{ inputs.endframe }}" - "${{ inputs.startframe }}"]
-            #numero de frames por seguimento 
-            xframe=$["$totalframes" / "${{ inputs.workernumber }}"]
-            #gerar lista com os numeros de frames iniciais e finais
-            for (( x=1; x<="${{ inputs.workernumber }}"; x++ )); do  
-                fend=$["$xframe" * "$x"]
-                fstart=$["$fend" - "$xframe" + "1"]
-                divframes="-s $fstart -e $fend"
-                fmake="${fmake}, $divframes"
-                fmakex=$(echo $fmake | sed 's/^, //')
-            done
-            echo "Fmake=$fmakex"
+          #Frames
+          if [ -z "$startframe" -a -z "$endframe" ]; then
+            startframe=$(blender -b ${{ inputs.blenderfile }} -S ${{ inputs.scene }} -P frames.py | grep frames | sed 's/^.*frames: //' | cut -d " " -f1 | awk -F\. '{print $1}')
+            endframe=$(blender -b ${{ inputs.blenderfile }} -S ${{ inputs.scene }} -P frames.py | grep frames | sed 's/^.*frames: //' | cut -d " " -f1 | awk -F\. '{print $3}')
           fi
-#     - name: get blender
-#       shell: bash
-#       run: |
-#         #Get_Blender
-#         version=3.3.1
-#         wget -cq https://mirror.clarkson.edu/blender/release/Blender3.3/blender-3.3.1-linux-x64.tar.xz
-#         tar -xf blender-${{ inputs.blenderversion }}-linux-x64.tar.xz
+          #numero total de frames do projeto
+          totalframes=$["$endframe" - "$startframe"]
+          #numero de frames por seguimento 
+          xframe=$["$totalframes" / "${{ inputs.workernumber }}"]
+          #gerar lista com os numeros de frames iniciais e finais
+          for (( x=1; x<="${{ inputs.workernumber }}"; x++ )); do  
+              fend=$["$xframe" * "$x"]
+              fstart=$["$fend" - "$xframe" + "1"]
+              divframes="-s $fstart -e $fend"
+              fmake="${fmake}, $divframes"
+              fmakex=$(echo $fmake | sed 's/^, //')
+          done
+          echo "Fmake=$fmakex"
 #     
 #     - name: get dependencies
 #       shell: bash
