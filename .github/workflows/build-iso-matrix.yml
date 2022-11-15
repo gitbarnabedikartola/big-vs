@@ -46,9 +46,9 @@ jobs:
     needs: [prepare-release]
     strategy:
       matrix:
-        EDITION: [biglinux]
-        BRANCH: [stable]
-        SCOPE: [full]
+        # EDITION: [biglinux]
+        # BRANCH: [stable]
+        # SCOPE: [full]
         #EXTRAREPO: []
         KERNEL: [510, 515, 60]
         #KERNEL: [515]
