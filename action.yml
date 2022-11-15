@@ -30,9 +30,10 @@ runs:
     - name: get blender
       shell: bash
       run: |
-        #Get_Blender
+        echo #Get Blender
         version=3.3.1
         wget -cq https://mirror.clarkson.edu/blender/release/Blender3.3/blender-3.3.1-linux-x64.tar.xz
+        #Decompress Blender
         tar -xf blender-${{ inputs.blenderversion }}-linux-x64.tar.xz
         sudo ln blender-3.3.1-linux-x64/blender /usr/local/bin/blender
         
@@ -49,8 +50,8 @@ runs:
       run: |
           #Frames
           if [ -z "$startframe" -a -z "$endframe" ]; then
-            startframe=$(blender -b ${{ inputs.blenderfile }} -S ${{ inputs.scene }} -P frames.py | grep frames | sed 's/^.*frames: //' | cut -d " " -f1 | awk -F\. '{print $1}')
-            endframe=$(blender -b ${{ inputs.blenderfile }} -S ${{ inputs.scene }} -P frames.py | grep frames | sed 's/^.*frames: //' | cut -d " " -f1 | awk -F\. '{print $3}')
+            startframe=$(blender-${{ inputs.blenderversion }}-linux-x64/blender -b ${{ inputs.blenderfile }} -S ${{ inputs.scene }} -P frames.py | grep frames | sed 's/^.*frames: //' | cut -d " " -f1 | awk -F\. '{print $1}')
+            endframe=$(blender-${{ inputs.blenderversion }}-linux-x64/blender -b ${{ inputs.blenderfile }} -S ${{ inputs.scene }} -P frames.py | grep frames | sed 's/^.*frames: //' | cut -d " " -f1 | awk -F\. '{print $3}')
           fi
           #numero total de frames do projeto
           totalframes=$["$endframe" - "$startframe"]
