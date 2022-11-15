@@ -3,13 +3,13 @@ on:
   workflow_dispatch:
   push:
 jobs:
-  job1:
+  frames:
     runs-on: ubuntu-latest
     outputs:
-      fmatrix: ${{ steps.set-frames.outputs.value }}
+      fmatrix: ${{ steps.set-frames.outputs.Nmatrix }}
+      fmake: ${{ steps.set-frames.outputs.Fmake }}
     steps:
       - id: set-frames
-        # run: echo "::set-output name=value::['a','b','c']"
         run: |
           #frame inicial
           startframe=0
@@ -34,8 +34,8 @@ jobs:
           done
           # echo "matrix=1" >> $GITHUB_OUTPUT
           # echo "value=['a','b','c']" >> $GITHUB_OUTPUT
-          echo "value=[$xxxx]" >> $GITHUB_OUTPUT
-  job2:
+          echo "Nmatrix=[$xxxx]" >> $GITHUB_OUTPUT
+  make:
     needs: job1
     runs-on: ubuntu-latest
     strategy:
