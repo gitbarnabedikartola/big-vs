@@ -9,7 +9,7 @@ jobs:
       - id: time
         shell: bash -O extglob {0}
         run: |
-          echo "FRAMES={[1]}" >> $GITHUB_ENV
+          echo "FRAMES=[1]" >> $GITHUB_ENV
       
   build-release:
     runs-on: ubuntu-20.04
