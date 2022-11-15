@@ -44,7 +44,7 @@ jobs:
               # echo "matrix=$xxxx" >> $GITHUB_OUTPUT
               # echo "::set-output name=value::[$xxx]"
           done
-          echo "matrix=1" >> $GITHUB_OUTPUT
+          echo "matrix={[1]}" >> $GITHUB_OUTPUT
         
   build-release:
     runs-on: ubuntu-20.04
