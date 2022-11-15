@@ -40,8 +40,8 @@ jobs:
               xx=$["$divisor" - "$x" + "1"]
               xxx="$xxx, $xx"
               # echo "$xxx" | sed 's/^, //' | sed 's/^/[/' | sed 's/$/]/'
-              # xxxx=$(echo "$xxx" | sed 's/^, //' | sed 's/^/[/' | sed 's/$/]/')
-              echo "matrix=$xxx" >> $GITHUB_OUTPUT
+              xxxx=$(echo "$xxx" | sed 's/^, //' | sed 's/^/[/' | sed 's/$/]/')
+              echo "matrix=$xxxx" >> $GITHUB_OUTPUT
           done
         
   build-release:
