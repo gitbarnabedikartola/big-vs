@@ -10,6 +10,8 @@ on:
 jobs:
   prepare-release:
     runs-on: ubuntu-20.04
+    outputs:
+      release_tag: ${{ steps.frames.outputs.matrix }}
     steps:
     #   - id: time
     #     uses: nanzm/get-time-action@v1.1
@@ -41,12 +43,10 @@ jobs:
               xxxx=$(echo "$xxx" | sed 's/^, //' | sed 's/^/[/' | sed 's/$/]/')
               echo "matrix=$xxxx" >> $GITHUB_OUTPUT
           done
-    outputs:
-      release_tag: ${{ steps.frames.outputs.matrix }}
         
   build-release:
     runs-on: ubuntu-20.04
-    # needs: [prepare-release]
+    needs: [prepare-release]
     strategy:
       matrix:
         # EDITION: [biglinux]
