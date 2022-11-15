@@ -37,8 +37,11 @@ jobs:
           workernumber: $workernumber
           blenderversion: 3.3.1
           blenderfile: big-vs-ubuntu.blend
-          startframe: 
-          endframe: 
+          #cena a ser renderizada, em branco renderiza a primeira cena
+          scene: 03-montagem
+          #preencher se quiser renderizar só uma parte, deixar em branco para renderizar os frames do .blend
+          startframe: 1
+          endframe: 99
         
       - name: push to git releases
         shell: bash

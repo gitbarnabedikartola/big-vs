@@ -7,6 +7,8 @@ inputs:
     required: true
   blenderfile:
     required: true
+  scene:
+    required: false
   startframe:
     required: false
   endframe:
@@ -21,6 +23,7 @@ runs:
         echo "WorkerNumber=${{ inputs.workernumber }}"
         echo "blenderversion=${{ inputs.blenderversion }}"
         echo "blenderfile=${{ inputs.blenderfile }}"
+        echo "scene=${{ inputs.scene }}"
         echo "startframe=${{ inputs.startframe }}"
         echo "endframe=${{ inputs.endframe }}"
         
@@ -31,24 +34,25 @@ runs:
           startframe=0
           #frame final
           endframe=735
-          # endframe=$(blender -b ${{ inputs.blenderfile }} -S 03-montagem -P frames.py | grep frames | cut -d "=" -f2)
+          # endframe=$(blender -b ${{ inputs.blenderfile }} -S ${{ inputs.scene }} -P frames.py | grep frames | cut -d "=" -f2)
           #numero de divisões do projeto
           divisor=10
           
-          #numero total de frames do projeto
-          totalframes=$["${{ inputs.endframe }}" - "${{ inputs.startframe }}"]
-          #numero de frames por seguimento 
-          xframe=$["$totalframes" / "${{ inputs.workernumber }}"]
-          #gerar lista com os numeros de frames iniciais e finais
-          for (( x=1; x<="${{ inputs.workernumber }}"; x++ )); do  
-              fend=$["$xframe" * "$x"]
-              fstart=$["$fend" - "$xframe" + "1"]
-              divframes="-s $fstart -e $fend"
-              fmake="${fmake}, ${{ inputs.workernumber }}"
-              fmakex=$(echo $fmake | sed 's/^, //')
-          done
-          echo "Fmake=$fmakex"
-        
+          if [ -n "${{ inputs.startframe }}" -a -n "${{ inputs.endframe }}" ]; then
+            #numero total de frames do projeto
+            totalframes=$["${{ inputs.endframe }}" - "${{ inputs.startframe }}"]
+            #numero de frames por seguimento 
+            xframe=$["$totalframes" / "${{ inputs.workernumber }}"]
+            #gerar lista com os numeros de frames iniciais e finais
+            for (( x=1; x<="${{ inputs.workernumber }}"; x++ )); do  
+                fend=$["$xframe" * "$x"]
+                fstart=$["$fend" - "$xframe" + "1"]
+                divframes="-s $fstart -e $fend"
+                fmake="${fmake}, ${{ inputs.workernumber }}"
+                fmakex=$(echo $fmake | sed 's/^, //')
+            done
+            echo "Fmake=$fmakex"
+          fi
 #     - name: get blender
 #       shell: bash
 #       run: |
