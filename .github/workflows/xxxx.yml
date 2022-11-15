@@ -17,8 +17,8 @@ jobs:
           startframe=0
           
           #frame final
-          # endframe=735
-          endframe=$(blender -b big-vs-ubuntu.blend -S 03-montagem -P frames.py | grep frames | cut -d "=" -f2)
+          endframe=735
+          # endframe=$(blender -b big-vs-ubuntu.blend -S 03-montagem -P frames.py | grep frames | cut -d "=" -f2)
           
           #numero de divisões do projeto
           divisor=10

@@ -11,74 +11,113 @@ inputs:
 runs:
   using: "composite"
   steps:
-  
-    - name: get blender
-      shell: bash
-      run: |
-        #Get_Blender
-        version=3.3.1
-        wget -cq https://mirror.clarkson.edu/blender/release/Blender3.3/blender-3.3.1-linux-x64.tar.xz
-        tar -xf blender-${{ inputs.blenderversion }}-linux-x64.tar.xz
-    
-    - name: get dependencies
-      shell: bash
-      run: |
-        #Get Get_Dependencies
-        
-        #render-animação
-        mkdir render-animacao
-        listanimacao=(
-        10min.mkv
-        59seg.mkv
-        pause-dir.mkv
-        pause-esq.mkv
-        play-dir.mkv
-        play-esq.mkv
-        speedup-dir.mkv
-        speedup-esq.mkv
-        )
-        pushd render-animacao
-        for i in "${listanimacao[@]}"; do
-          wget -cq https://github.com/gitbarnabedikartola/big-vs/releases/download/render-animacao/$i
-        done
-        ls -lh
-        popd
-        
-        #capturas
-        mkdir -p capturas
-        listacapturas=(
-        Mortal-Kombat-2.mp4
-        $captura
-        )
-        pushd capturas
-        for i in "${listacapturas[@]}"; do
-          wget -cq https://github.com/gitbarnabedikartola/big-vs/releases/download/capturas/$i
-        done
-        ls -lh
-        popd
-        
-        #upload to github release
-        #gh release create render-animacao --title render-animacao --repo gitbarnabedikartola/big-vs --notes "animação sempre usadas"
-        #for i in *.mkv ; do gh release upload render-animacao --repo gitbarnabedikartola/big-vs --clobber $i; done
-      
-    - name: make
+    -name: echos
       shell:
       run: |
-        #numero de divisões
-        echo "${{ inputs.workernumber }}"
-        #valores do frames todos jundos e separados por ,
-        echo "${{ inputs.divframes }}"
+        echo "WorkerNumber=${{ inputs.workernumber }}"
         
-        intervalo=$(echo "${{ inputs.divframes }}" | cut -d "," -f${{ inputs.workernumber }})
-        #awk -F\, '{print $(echo ${{ inputs.workernumber }})}'
-        echo "$intervalo"
-        
-        blender-${{ inputs.blenderversion }}-linux-x64/blender -b big-vs-ubuntu.blend -o // -S 03-montagem $intervalo -a
-        
-        ls -lh
-        
-        echo ${{ github.repository }}
-        
-     # Tmate ##
-     #- name: Setup TMATE Session
-     #  uses: mxschmitt/action-tmate@v3
+#     -name: frames
+#       shell:
+#       run: |
+#         #frame inicial
+#           startframe=0
+#           
+#           #frame final
+#           endframe=735
+#           # endframe=$(blender -b big-vs-ubuntu.blend -S 03-montagem -P frames.py | grep frames | cut -d "=" -f2)
+#           
+#           #numero de divisões do projeto
+#           divisor=10
+#           
+#           #numero total de frames do projeto
+#           totalframes=$["$endframe" - "$startframe"]
+#           #numero de frames por seguimento 
+#           xframe=$["$totalframes" / "$divisor"]
+#           #gerar lista com os numeros de frames iniciais e finais
+#           for (( x=1; x<="$divisor"; x++ )); do  
+#               fend=$["$xframe" * "$x"]
+#               fstart=$["$fend" - "$xframe" + "1"]
+#               divframes="-s $fstart -e $fend"
+#               fmake="${fmake}, $divframes"
+#               fmakex=$(echo $fmake | sed 's/^, //')
+#               
+#               
+#               xx=$["$divisor" - "$x" + "1"]
+#               xxx="$xxx,'$xx'"
+#               xxxx=$(echo "$xxx" | sed 's/^,//')
+#           done
+#           # echo "matrix=1" >> $GITHUB_OUTPUT
+#           # echo "value=['a','b','c']" >> $GITHUB_OUTPUT
+#           echo "Nmatrix=[$xxxx]" >> $GITHUB_OUTPUT
+#           echo "Fmake=$fmakex" >> $GITHUB_OUTPUT
+#         
+#     - name: get blender
+#       shell: bash
+#       run: |
+#         #Get_Blender
+#         version=3.3.1
+#         wget -cq https://mirror.clarkson.edu/blender/release/Blender3.3/blender-3.3.1-linux-x64.tar.xz
+#         tar -xf blender-${{ inputs.blenderversion }}-linux-x64.tar.xz
+#     
+#     - name: get dependencies
+#       shell: bash
+#       run: |
+#         #Get Get_Dependencies
+#         
+#         #render-animação
+#         mkdir render-animacao
+#         listanimacao=(
+#         10min.mkv
+#         59seg.mkv
+#         pause-dir.mkv
+#         pause-esq.mkv
+#         play-dir.mkv
+#         play-esq.mkv
+#         speedup-dir.mkv
+#         speedup-esq.mkv
+#         )
+#         pushd render-animacao
+#         for i in "${listanimacao[@]}"; do
+#           wget -cq https://github.com/gitbarnabedikartola/big-vs/releases/download/render-animacao/$i
+#         done
+#         ls -lh
+#         popd
+#         
+#         #capturas
+#         mkdir -p capturas
+#         listacapturas=(
+#         Mortal-Kombat-2.mp4
+#         $captura
+#         )
+#         pushd capturas
+#         for i in "${listacapturas[@]}"; do
+#           wget -cq https://github.com/gitbarnabedikartola/big-vs/releases/download/capturas/$i
+#         done
+#         ls -lh
+#         popd
+#         
+#         #upload to github release
+#         #gh release create render-animacao --title render-animacao --repo gitbarnabedikartola/big-vs --notes "animação sempre usadas"
+#         #for i in *.mkv ; do gh release upload render-animacao --repo gitbarnabedikartola/big-vs --clobber $i; done
+#       
+#     - name: make
+#       shell:
+#       run: |
+#         #numero de divisões
+#         echo "${{ inputs.workernumber }}"
+#         #valores do frames todos jundos e separados por ,
+#         echo "${{ inputs.divframes }}"
+#         
+#         intervalo=$(echo "${{ inputs.divframes }}" | cut -d "," -f${{ inputs.workernumber }})
+#         #awk -F\, '{print $(echo ${{ inputs.workernumber }})}'
+#         echo "$intervalo"
+#         
+#         blender-${{ inputs.blenderversion }}-linux-x64/blender -b big-vs-ubuntu.blend -o // -S 03-montagem $intervalo -a
+#         
+#         ls -lh
+#         
+#         echo ${{ github.repository }}
+#         
+#      # Tmate ##
+#      #- name: Setup TMATE Session
+#      #  uses: mxschmitt/action-tmate@v3
