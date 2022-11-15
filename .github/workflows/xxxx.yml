@@ -16,7 +16,7 @@ jobs:
           #frame final
           endframe=3000
           #numero de divisões do projeto
-          divisor=10
+          divisor=3
           #numero total de frames do projeto
           totalframes=$["$endframe" - "$startframe"]
           #numero de frames por seguimento 
@@ -35,7 +35,7 @@ jobs:
           # echo "matrix=1" >> $GITHUB_OUTPUT
           # echo "value=['a','b','c']" >> $GITHUB_OUTPUT
           echo "Nmatrix=[$xxxx]" >> $GITHUB_OUTPUT
-          echo "divframes=[$divframes]" >> $GITHUB_OUTPUT
+          echo "Fmake=[$divframes]" >> $GITHUB_OUTPUT
   make:
     needs: frames
     runs-on: ubuntu-latest
@@ -45,4 +45,4 @@ jobs:
     steps:
       - run: |
           echo "${{ matrix.Nworks }}"
-          echo "${{fromJSON(needs.frames.outputs.fmatrix)}}"
+          echo "${{ needs.frames.outputs.Fmake }}"
