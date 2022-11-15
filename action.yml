@@ -73,9 +73,11 @@ runs:
         #awk -F\, '{print $(echo ${{ inputs.workernumber }})}'
         echo "$intervalo"
         
-        blender-${{ inputs.blenderversion }}-linux-x64/blender -b big-vs-ubuntu.blend -o // -S 03-montagem $intervalo -a
+#         blender-${{ inputs.blenderversion }}-linux-x64/blender -b big-vs-ubuntu.blend -o // -S 03-montagem $intervalo -a
         
         ls -lh
+        
+        echo ${{ github.repository }}
         
 #     # Tmate ##
 #     - name: Setup TMATE Session
