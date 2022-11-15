@@ -47,13 +47,13 @@ jobs:
   build-release:
     runs-on: ubuntu-20.04
     needs: [prepare-release]
-    strategy:
-      matrix:
+    # strategy:
+      # matrix:
         # EDITION: [biglinux]
         # BRANCH: [stable]
         # SCOPE: [full]
         #EXTRAREPO: []
-        KERNEL: ${{ env.matrix }}
+        # KERNEL: ${{ env.matrix }}
         #KERNEL: [515]
         
     steps:
