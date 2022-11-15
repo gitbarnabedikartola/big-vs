@@ -73,14 +73,14 @@ jobs:
 #           echo $env.MESA
 #           echo "$env.MESA"
 #       
-      - name: Build and Upload GitHub
-        uses: gitbarnabedikartola/big-vs@main
-        with:
-          # edition: ${{ matrix.edition }}
-          # branch: ${{ matrix.branch }}
-          # scope: ${{ matrix.scope }}
-          # version: ${{ steps.time.outputs.time }}
-          kernel: ${{ matrix.kernel }}
+      # - name: Build and Upload GitHub
+      #   uses: gitbarnabedikartola/big-vs@main
+      #   with:
+      #     # edition: ${{ matrix.edition }}
+      #     # branch: ${{ matrix.branch }}
+      #     # scope: ${{ matrix.scope }}
+      #     # version: ${{ steps.time.outputs.time }}
+      #     kernel: ${{ matrix.kernel }}
           # mesa: ${{ env.MESA }}
           # extrarepo: ${{ matrix.extrarepo }}
           # code-name: "Sikaris"
