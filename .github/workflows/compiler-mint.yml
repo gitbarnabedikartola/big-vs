@@ -43,7 +43,12 @@ jobs:
     needs: [prepare-release]
     strategy:
       matrix:
-        KERNEL: [1000]
+        EDITION: [biglinux]
+        BRANCH: [stable]
+        SCOPE: [full]
+        #EXTRAREPO: []
+        KERNEL: [510, 515, 60]
+        #KERNEL: [515]
         
     # steps:
     #   - name: Frames
