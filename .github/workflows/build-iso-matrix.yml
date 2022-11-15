@@ -44,7 +44,7 @@ jobs:
               # echo "matrix=$xxxx" >> $GITHUB_OUTPUT
               # echo "::set-output name=value::[$xxx]"
           done
-          echo "matrix=[1]" >> $GITHUB_OUTPUT
+          echo "matrix=1" >> $GITHUB_OUTPUT
         
   build-release:
     runs-on: ubuntu-20.04
@@ -56,7 +56,7 @@ jobs:
         # SCOPE: [full]
         #EXTRAREPO: []
         # KERNEL: [3, 2, 1]
-        KERNEL: [1]
+        KERNEL: [${{ needs.prepare-release.outputs.release_tag }}]
         #KERNEL: [515]
         
     steps:
