@@ -22,7 +22,7 @@ jobs:
         # BRANCH: [stable]
         # SCOPE: [full]
         #EXTRAREPO: []
-        KERNEL: [510, 515, 60]
+        KERNEL: ${{ needs.prepare-release.outputs.build-release }}
         #KERNEL: [515]
     outputs:
       release_tag: ${{ steps.frames.outputs.matrix }}    
