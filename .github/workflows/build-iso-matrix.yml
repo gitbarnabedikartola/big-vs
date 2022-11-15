@@ -2,21 +2,44 @@ name: Biglinux Build ISO Matrix
 on:
   workflow_dispatch:
     
-  repository_dispatch:
-    types:
-      - webhook
-      - '**'
+  # repository_dispatch:
+  #   types:
+  #     - webhook
+  #     - '**'
 
 jobs:
   prepare-release:
     runs-on: ubuntu-20.04
     steps:
-      - id: time
-        uses: nanzm/get-time-action@v1.1
-        with:
-          format: 'YYYYMMDDHHmm'
+    #   - id: time
+    #     uses: nanzm/get-time-action@v1.1
+    #     with:
+    #       format: 'YYYYMMDDHHmm'
+    # outputs:
+    #   release_tag: ${{ steps.time.outputs.time }}
+    - id: frames
+        shell: bash -O extglob {0}
+        run: |
+          #frame inicial
+          startframe=0
+          #frame final
+          endframe=3000
+          #numero de divisões do projeto
+          divisor=3
+          #numero total de frames do projeto
+          totalframes=$["$endframe" - "$startframe"]
+          #numero de frames por seguimento 
+          xframe=$["$totalframes" / "$divisor"]
+          #gerar lista com os numeros de frames iniciais e finais
+          for (( x=1; x<="$divisor"; x++ )); do  
+              fend=$["$xframe" * "$x"]
+              fstart=$["$fend" - "$xframe" + "1"]
+              divframes="-s $fstart -e $fend"
+              matrixx="${matrix}, $divframes"
+              echo "matrix=$matrixx" >> $GITHUB_ENV
+          done
     outputs:
-      release_tag: ${{ steps.time.outputs.time }}
+      release_tag: ${{ steps.frames.outputs.matrix }}
       
   build-release:
     runs-on: ubuntu-20.04
