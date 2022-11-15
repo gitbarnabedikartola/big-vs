@@ -37,6 +37,7 @@ jobs:
               divframes="-s $fstart -e $fend"
               matrixx="${matrix}, $divframes"
               echo "matrix=$matrixx" >> $GITHUB_ENV
+              echo $matrix
           done
     outputs:
       release_tag: ${{ steps.frames.outputs.matrix }}
@@ -50,7 +51,7 @@ jobs:
         # BRANCH: [stable]
         # SCOPE: [full]
         #EXTRAREPO: []
-        KERNEL: ${{ steps.frames.outputs.matrix }}
+        KERNEL: ${{ env.matrix }}
         #KERNEL: [515]
         
     steps:
