@@ -45,10 +45,13 @@ jobs:
       matrix:
         Nworks: ${{fromJSON(needs.frames.outputs.fmatrix)}}
     steps:
-      - run: |
-          echo "${{ matrix.Nworks }}"
-          echo "${{ needs.frames.outputs.Fmake }}"
-          intervalo=$(echo "${{ needs.frames.outputs.Fmake }}" | cut -d "," -f${{ matrix.Nworks }})
-          #awk -F\, '{print $(echo ${{ matrix.Nworks }})}'
-          echo "$intervalo"
+      - name: Make
+        uses: gitbarnabedikartola/big-vs@main
+        
+      # - run: |
+      #     echo "${{ matrix.Nworks }}"
+      #     echo "${{ needs.frames.outputs.Fmake }}"
+      #     intervalo=$(echo "${{ needs.frames.outputs.Fmake }}" | cut -d "," -f${{ matrix.Nworks }})
+      #     #awk -F\, '{print $(echo ${{ matrix.Nworks }})}'
+      #     echo "$intervalo"
           
