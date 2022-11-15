@@ -11,14 +11,17 @@ jobs:
     steps:
       - id: set-frames
         run: |
+          
+        
           #frame inicial
           startframe=0
           
           #frame final
-          endframe=735
+          # endframe=735
+          endframe=$(blender -b big-vs-ubuntu.blend -S 03-montagem -P frames.py | grep frames | cut -d "=" -f2)
           
           #numero de divisões do projeto
-          divisor=3
+          divisor=10
           
           #numero total de frames do projeto
           totalframes=$["$endframe" - "$startframe"]
