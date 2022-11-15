@@ -2,9 +2,11 @@ name: 'Compiler Action'
 
 inputs:
   workernumber:
-    required: false
+    required: true
   divframes: 
-    required: false
+    required: true
+  blenderversion: 
+    required: true
 
 runs:
   using: "composite"
@@ -16,7 +18,7 @@ runs:
         #Get_Blender
         version=3.3.1
         wget -cq https://mirror.clarkson.edu/blender/release/Blender3.3/blender-3.3.1-linux-x64.tar.xz
-        tar -xf blender-$version-linux-x64.tar.xz
+        tar -xf blender-${{ inputus.blenderversion }}-linux-x64.tar.xz
     
     - name: Get_Dependencies
       shell: bash
@@ -71,7 +73,7 @@ runs:
         #awk -F\, '{print $(echo ${{ inputs.workernumber }})}'
         echo "$intervalo"
         
-        blender-$version-linux-x64/blender -b big-vs-ubuntu.blend -x 1 -noaudio -o // -S 03-montagem $intervalo -a
+        blender-${{ inputus.blenderversion }}-linux-x64/blender -b big-vs-ubuntu.blend -x 1 -noaudio -o // -S 03-montagem $intervalo -a
         
         ls -lh
         

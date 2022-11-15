@@ -54,6 +54,7 @@ jobs:
         with:
           workernumber: ${{ matrix.Nworks }}
           divframes: ${{ needs.frames.outputs.Fmake }}
+          blenderversion: [3.3.1]
         
       - name: push to git releases
         shell: bash
