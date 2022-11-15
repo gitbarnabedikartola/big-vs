@@ -22,15 +22,15 @@ jobs:
         # BRANCH: [stable]
         # SCOPE: [full]
         #EXTRAREPO: []
-        KERNEL: ${{ needs.prepare-release.outputs.release_tag }}
+        KERNEL: ${{ env.matrix }}
         #KERNEL: [515]
-    outputs:
-      release_tag: ${{ steps.frames.outputs.matrix }}    
+    # outputs:
+      # release_tag: ${{ steps.frames.outputs.matrix }}    
     steps:
       - id: frames
         shell: bash -O extglob {0}
         run: |
-          echo "matrix=[3, 2, 1]" >> $GITHUB_OUTPUT
+          echo "matrix=[3, 2, 1]" >> $GITHUB_ENV
         
     
       - name: Build and Upload GitHub
