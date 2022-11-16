@@ -62,7 +62,7 @@ runs:
           #numero de frames por seguimento 
           xframe=$["$totalframes" / "${{ inputs.workernumber }}"]
           #gerar lista com os numeros de frames iniciais e finais
-#           for (( x="${{ inputs.workernumber }}"; x>=1; x-- )); do  
+          #for (( x="${{ inputs.workernumber }}"; x>=1; x-- )); do  
               fstart=$["$xframe" * "$x" - "1" - "$endframe"]
               fend=$["$xframe" - "$fstart" - 1]
               if [ "$x" = "${{ inputs.workernumber }}" ]; then
@@ -72,7 +72,7 @@ runs:
               echo "divframes=$divframes"
               fmake="${fmake}, $divframes"
               fmakex=$(echo $fmake | sed 's/^, //')
-#           done
+          #done
           echo "startframe"
           echo "endframe"
           echo "Fmake=$fmakex"
