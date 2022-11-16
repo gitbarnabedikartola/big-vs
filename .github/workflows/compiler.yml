@@ -4,7 +4,7 @@ on:
   push:
   
 env:
-  workernumbers: 3
+  workernumbers: 10
   
 jobs:
   nmatrix:
