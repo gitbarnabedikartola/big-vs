@@ -28,13 +28,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        Nworks: ${{fromJSON(needs.nmatrix.outputs.nmatrix)}}
+        nworks: ${{fromJSON(needs.nmatrix.outputs.nmatrix)}}
     steps:
       - uses: actions/checkout@v3
       - name: Make
         uses: gitbarnabedikartola/big-vs@main
         with:
           workernumber: $workernumber
+          nworks: ${{ matrix.nworks }}
           blenderversion: 3.3.1
           blenderfile: big-vs-ubuntu.blend
           #cena a ser renderizada, em branco renderiza a primeira cena

@@ -3,7 +3,7 @@ name: 'Compiler Action'
 inputs:
   workernumber:
     required: true
-  Nworks:
+  nworks:
     required: true
   blenderversion: 
     required: true
@@ -23,7 +23,7 @@ runs:
       shell:
       run: |
         echo "WorkerNumber=${{ inputs.workernumber }}"
-        echo "Nworks=${{ inputs.Nworks }}"
+        echo "nworks=${{ inputs.nwork }}"
         echo "blenderversion=${{ inputs.blenderversion }}"
         echo "blenderfile=${{ inputs.blenderfile }}"
         echo "scene=${{ inputs.scene }}"
@@ -66,9 +66,9 @@ runs:
           xframe=$["$totalframes" / "${{ inputs.workernumber }}"]
           #gerar lista com os numeros de frames iniciais e finais
           #for (( x="${{ inputs.workernumber }}"; x>=1; x-- )); do  
-              fstart=$["$xframe" * "${{ inputs.Nworks }}" - "1" - "$endframe"]
+              fstart=$["$xframe" * "${{ inputs.nworks }}" - "1" - "$endframe"]
               fend=$["$xframe" - "$fstart" - 1]
-              if [ "${{ inputs.Nworks }}" = "${{ inputs.workernumber }}" ]; then
+              if [ "${{ inputs.nworks }}" = "${{ inputs.workernumber }}" ]; then
                 fstart=$["$fstart" + "1"]
               fi
               divframes="-s $fstart -e $fend"
