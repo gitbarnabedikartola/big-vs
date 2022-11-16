@@ -1,9 +1,9 @@
 name: 'Compiler Action'
 
 inputs:
-  workernumber:
+  workernumbers:
     required: true
-  nworks:
+  workerN:
     required: true
   blenderversion: 
     required: true
@@ -22,8 +22,8 @@ runs:
     - name: echos
       shell:
       run: |
-        echo "WorkerNumber=${{ inputs.workernumber }}"
-        echo "nworks=${{ inputs.nwork }}"
+        echo "WorkerNumber=${{ inputs.workernumbers }}"
+        echo "workerN=${{ inputs.workerN }}"
         echo "blenderversion=${{ inputs.blenderversion }}"
         echo "blenderfile=${{ inputs.blenderfile }}"
         echo "scene=${{ inputs.scene }}"
@@ -49,7 +49,7 @@ runs:
       env:
         startframe: ${{ inputs.startframe }}
         endframe: ${{ inputs.endframe }}
-        divisor: ${{ inputs.workernumber }}
+        divisor: ${{ inputs.workernumbers }}
       run: |
           #Frames
           if [ -z "$startframe" -a -z "$endframe" ]; then
@@ -63,22 +63,22 @@ runs:
           #numero total de frames do projeto
           totalframes=$["$endframe" - "$startframe"]
           #numero de frames por seguimento 
-          xframe=$["$totalframes" / "${{ inputs.workernumber }}"]
+          xframe=$["$totalframes" / "${{ inputs.workernumbers }}"]
           #gerar lista com os numeros de frames iniciais e finais
-          #for (( x="${{ inputs.workernumber }}"; x>=1; x-- )); do  
-              fstart=$["$xframe" * "${{ inputs.nworks }}" - "1" - "$endframe"]
+          #for (( x="${{ inputs.workernumbers }}"; x>=1; x-- )); do  
+              fstart=$["$xframe" * "${{ inputs.workerN }}" - "1" - "$endframe"]
               fend=$["$xframe" - "$fstart" - 1]
-              if [ "${{ inputs.nworks }}" = "${{ inputs.workernumber }}" ]; then
+              if [ "${{ inputs.workerN }}" = "${{ inputs.workernumbers }}" ]; then
                 fstart=$["$fstart" + "1"]
               fi
               divframes="-s $fstart -e $fend"
               echo "divframes=$divframes"
-              fmake="${fmake}, $divframes"
-              fmakex=$(echo $fmake | sed 's/^, //')
+              #fmake="${fmake}, $divframes"
+              #fmakex=$(echo $fmake | sed 's/^, //')
           #done
-          echo "startframe"
-          echo "endframe"
-          echo "Fmake=$fmakex"
+          #echo "startframe"
+          #echo "endframe"
+          #echo "Fmake=$fmakex"
 #     
 #     - name: get dependencies
 #       shell: bash
@@ -125,12 +125,12 @@ runs:
 #       shell:
 #       run: |
 #         #numero de divisões
-#         echo "${{ inputs.workernumber }}"
+#         echo "${{ inputs.workernumbers }}"
 #         #valores do frames todos jundos e separados por ,
 #         echo "${{ inputs.divframes }}"
 #         
-#         intervalo=$(echo "${{ inputs.divframes }}" | cut -d "," -f${{ inputs.workernumber }})
-#         #awk -F\, '{print $(echo ${{ inputs.workernumber }})}'
+#         intervalo=$(echo "${{ inputs.divframes }}" | cut -d "," -f${{ inputs.workernumbers }})
+#         #awk -F\, '{print $(echo ${{ inputs.workernumbers }})}'
 #         echo "$intervalo"
 #         
 #         blender-${{ inputs.blenderversion }}-linux-x64/blender -b ${{ inputs.blenderfile }} -o // -S 03-montagem $intervalo -a

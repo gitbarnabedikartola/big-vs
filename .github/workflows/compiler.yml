@@ -4,7 +4,7 @@ on:
   push:
   
 env:
-  workernumber: 3
+  workernumbers: 3
   
 jobs:
   nmatrix:
@@ -15,9 +15,9 @@ jobs:
     steps:
       - id: set-nmatrix
         run: |
-          #criar matrix para workernumber
-          for (( x=$workernumber; x>=1; x-- )); do  
-              xx=$["$workernumber" - "$x" + "1"]
+          #criar matrix para workernumbers
+          for (( x=$workernumbers; x>=1; x-- )); do  
+              xx=$["$workernumbers" - "$x" + "1"]
               xxx="$xxx,'$xx'"
               xxxx=$(echo "$xxx" | sed 's/^,//')
           done
@@ -28,21 +28,21 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        nworks: ${{fromJSON(needs.nmatrix.outputs.nmatrix)}}
+        workerN: ${{fromJSON(needs.nmatrix.outputs.nmatrix)}}
     steps:
       - uses: actions/checkout@v3
       - name: Make
         uses: gitbarnabedikartola/big-vs@main
         with:
-          workernumber: $workernumber
-          nworks: ${{ matrix.nworks }}
+          workernumbers: $workernumbers
+          workerN: ${{ matrix.workerN }}
           blenderversion: 3.3.1
           blenderfile: big-vs-ubuntu.blend
           #cena a ser renderizada, em branco renderiza a primeira cena
           scene: 03-montagem
           #preencher se quiser renderizar só uma parte, deixar em branco para renderizar os frames do .blend
-          startframe: 50
-          endframe: 3050
+          startframe: 
+          endframe: 
         
       - name: push to git releases
         shell: bash
