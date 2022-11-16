@@ -93,65 +93,57 @@ runs:
           #echo "startframe"
           #echo "endframe"
           #echo "Fmake=$fmakex"
-#     
-#     - name: get dependencies
-#       shell: bash
-#       run: |
-#         #Get Get_Dependencies
-#         
-#         #render-animação
-#         mkdir render-animacao
-#         listanimacao=(
-#         10min.mkv
-#         59seg.mkv
-#         pause-dir.mkv
-#         pause-esq.mkv
-#         play-dir.mkv
-#         play-esq.mkv
-#         speedup-dir.mkv
-#         speedup-esq.mkv
-#         )
-#         pushd render-animacao
-#         for i in "${listanimacao[@]}"; do
-#           wget -cq https://github.com/gitbarnabedikartola/big-vs/releases/download/render-animacao/$i
-#         done
-#         ls -lh
-#         popd
-#         
-#         #capturas
-#         mkdir -p capturas
-#         listacapturas=(
-#         Mortal-Kombat-2.mp4
-#         $captura
-#         )
-#         pushd capturas
-#         for i in "${listacapturas[@]}"; do
-#           wget -cq https://github.com/gitbarnabedikartola/big-vs/releases/download/capturas/$i
-#         done
-#         ls -lh
-#         popd
-#         
-#         #upload to github release
-#         #gh release create render-animacao --title render-animacao --repo gitbarnabedikartola/big-vs --notes "animação sempre usadas"
-#         #for i in *.mkv ; do gh release upload render-animacao --repo gitbarnabedikartola/big-vs --clobber $i; done
-#       
-#     - name: make
-#       shell:
-#       run: |
-#         #numero de divisões
-#         echo "${{ inputs.workernumbers }}"
-#         #valores do frames todos jundos e separados por ,
-#         echo "${{ inputs.divframes }}"
-#         
-#         intervalo=$(echo "${{ inputs.divframes }}" | cut -d "," -f${{ inputs.workernumbers }})
-#         #awk -F\, '{print $(echo ${{ inputs.workernumbers }})}'
-#         echo "$intervalo"
-#         
-#         blender-${{ inputs.blenderversion }}-linux-x64/blender -b ${{ inputs.blenderfile }} -o // -S 03-montagem $intervalo -a
-#         
-#         ls -lh
-#         
-#         echo ${{ github.repository }}
+    
+    - name: get dependencies
+      shell: bash
+      run: |
+        #Get Get_Dependencies
+        
+        #render-animação
+        mkdir render-animacao
+        listanimacao=(
+        10min.mkv
+        59seg.mkv
+        pause-dir.mkv
+        pause-esq.mkv
+        play-dir.mkv
+        play-esq.mkv
+        speedup-dir.mkv
+        speedup-esq.mkv
+        )
+        pushd render-animacao
+        for i in "${listanimacao[@]}"; do
+          wget -cq https://github.com/gitbarnabedikartola/big-vs/releases/download/render-animacao/$i
+        done
+        ls -lh
+        popd
+        
+        #capturas
+        mkdir -p capturas
+        listacapturas=(
+        Mortal-Kombat-2.mp4
+        $captura
+        )
+        pushd capturas
+        for i in "${listacapturas[@]}"; do
+          wget -cq https://github.com/gitbarnabedikartola/big-vs/releases/download/capturas/$i
+        done
+        ls -lh
+        popd
+        
+        #upload to github release
+        #gh release create render-animacao --title render-animacao --repo gitbarnabedikartola/big-vs --notes "animação sempre usadas"
+        #for i in *.mkv ; do gh release upload render-animacao --repo gitbarnabedikartola/big-vs --clobber $i; done
+      
+    - name: make
+      shell:
+      run: |
+        echo #Render
+        blender-${{ inputs.blenderversion }}-linux-x64/blender -b ${{ inputs.blenderfile }} -o // -S ${{ inputs.scene }} $intervalo -a
+        
+        ls -lh
+        
+        echo ${{ github.repository }}
 #         
 #      # Tmate ##
 #      #- name: Setup TMATE Session
