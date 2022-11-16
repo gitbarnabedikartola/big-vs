@@ -62,15 +62,15 @@ runs:
           #numero de frames por seguimento 
           xframe=$["$totalframes" / "${{ inputs.workernumber }}"]
           #gerar lista com os numeros de frames iniciais e finais
-          for (( x="$divisor"; x>=1; x-- )); do
+          for (( x=1; x<="${{ inputs.workernumber }}"; x++ )); do  
               fstart=$["$xframe" * "$x" - "1" - "$endframe"]
               fend=$["$xframe" - "$fstart" - 1]
-              if [ "$x" = "$divisor" ]; then
+              if [ "$x" = "${{ inputs.workernumber }}" ]; then
                 fstart=$["$fstart" + "1"]
               fi
               divframes="-s $fstart -e $fend"
-              matrix="${matrix}, $divframes"
-              # echo "matrixx=$matrix" >> $GITHUB_ENV
+              fmake="${fmake}, $divframes"
+              fmakex=$(echo $fmake | sed 's/^, //')
           done
           echo "startframe"
           echo "endframe"
