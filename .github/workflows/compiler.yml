@@ -48,6 +48,7 @@ jobs:
         run: |
           echo ${{ github.repository }}
           ls -lh
+          sleep 600
           echo ${{ secrets.TOKEN_UPLOAD }} | gh auth login --with-token
           # gh release create renders --title renders --repo ${{ github.repository }} --notes "sempre usados"
           for i in *.mkv; do

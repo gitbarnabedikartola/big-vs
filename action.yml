@@ -63,7 +63,7 @@ runs:
           xframe=$["$totalframes" / "${{ inputs.workernumber }}"]
           #gerar lista com os numeros de frames iniciais e finais
           #for (( x="${{ inputs.workernumber }}"; x>=1; x-- )); do  
-              fstart=$["$xframe" * "$x" - "1" - "$endframe"]
+              fstart=$["$xframe" * "${{ inputs.workernumber }}" - "1" - "$endframe"]
               fend=$["$xframe" - "$fstart" - 1]
               if [ "$x" = "${{ inputs.workernumber }}" ]; then
                 fstart=$["$fstart" + "1"]
