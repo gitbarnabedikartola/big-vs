@@ -16,7 +16,7 @@ jobs:
       - id: set-nmatrix
         run: |
           #criar matrix para workernumber
-          for (( x=1; x<="$workernumber"; x++ )); do  
+          for (( x=$workernumber; x>=1; x-- )); do  
               xx=$["$workernumber" - "$x" + "1"]
               xxx="$xxx,'$xx'"
               xxxx=$(echo "$xxx" | sed 's/^,//')
