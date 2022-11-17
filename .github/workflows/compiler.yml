@@ -60,9 +60,9 @@ jobs:
           ls -lh
           # sleep 600
           echo ${{ secrets.TOKEN_UPLOAD }} | gh auth login --with-token
-          gh release create renders --title renders --repo ${{ github.repository }} --notes "sempre usados"
+          gh release create renders-${{ needs.prepare-release.outputs.release_tag }} --title renders-${{ needs.prepare-release.outputs.release_tag }} --repo ${{ github.repository }} --notes "Renderizações"
           for i in *.mkv; do
-            gh release upload renders --repo ${{ github.repository }} --clobber $i
+            gh release upload renders-${{ needs.prepare-release.outputs.release_tag }} --repo ${{ github.repository }} --clobber $i
           done
           
   concat:
@@ -72,14 +72,22 @@ jobs:
     - name: Concat
         shell: bash
         run: |
+          mkdir concat
+          cd concat
+          gh release view renders-${{ needs.prepare-release.outputs.release_tag }} > renders-tag
+          download=$(cat renders-tag | grep url | awk '{print $2}' | sed 's/tag/download/')
+          for i in $(cat renders-tag | grep asset | awk '{print $2}'); do wget -c ${download}/${i}; done
           
-    
-    
-    
-    
-    
-    
-    
+          for f in ./*.mkv; do echo "file '$f'" >> mylist.txt; done
+          cat mylist.txt | awk '{print $2}' | sed s/\'//g | sed 's/^..//' | sort -t'-' -k1 -n | awk '{print "file '\''./"$0"'\''" }' > mylist2.txt
+          ffmpeg -f concat -safe 0 -i mylist2.txt -c copy full-video-output.mkv
+          
+          echo ${{ secrets.TOKEN_UPLOAD }} | gh auth login --with-token
+          
+          for i in *.mkv; do
+            gh release upload renders-${{ needs.prepare-release.outputs.release_tag }} --repo ${{ github.repository }} --clobber $i
+          done
+          
       #   ##Tmate ##
       # - name: Setup TMATE Session
       #   uses: mxschmitt/action-tmate@v3    
