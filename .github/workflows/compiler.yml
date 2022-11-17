@@ -16,6 +16,11 @@ jobs:
           format: 'YYYY_MM_DD_HHmm'
     outputs:
       release_tag: ${{ steps.time.outputs.time }}
+      - name:
+        shell:
+        bash: |
+          echo ${{ secrets.TOKEN_UPLOAD }} | gh auth login --with-token
+          gh release create renders-${{ needs.prepare-release.outputs.release_tag }} --title renders-${{ needs.prepare-release.outputs.release_tag }} --repo ${{ github.repository }} --notes "Renderizações"
       
   nmatrix:
     runs-on: ubuntu-latest
@@ -59,8 +64,8 @@ jobs:
           echo ${{ github.repository }}
           ls -lh
           # sleep 600
-          echo ${{ secrets.TOKEN_UPLOAD }} | gh auth login --with-token
-          gh release create renders-${{ needs.prepare-release.outputs.release_tag }} --title renders-${{ needs.prepare-release.outputs.release_tag }} --repo ${{ github.repository }} --notes "Renderizações" || echo "release already exists"
+          # echo ${{ secrets.TOKEN_UPLOAD }} | gh auth login --with-token
+          # gh release create renders-${{ needs.prepare-release.outputs.release_tag }} --title renders-${{ needs.prepare-release.outputs.release_tag }} --repo ${{ github.repository }} --notes "Renderizações" || echo "release already exists"
           for i in *.mkv; do
             gh release upload renders-${{ needs.prepare-release.outputs.release_tag }} --repo ${{ github.repository }} --clobber $i
           done
@@ -72,18 +77,26 @@ jobs:
     - name: Concat
       shell: bash
       run: |
+        echo "LS 1"
+        ls -lh
+      
         mkdir concat
         cd concat
         gh release view renders-${{ needs.prepare-release.outputs.release_tag }} > renders-tag
         download=$(cat renders-tag | grep url | awk '{print $2}' | sed 's/tag/download/')
         for i in $(cat renders-tag | grep asset | awk '{print $2}'); do wget -c ${download}/${i}; done
         
+        echo "LS 2"
+        ls -lh
+        
         for f in ./*.mkv; do echo "file '$f'" >> mylist.txt; done
         cat mylist.txt | awk '{print $2}' | sed s/\'//g | sed 's/^..//' | sort -t'-' -k1 -n | awk '{print "file '\''./"$0"'\''" }' > mylist2.txt
         ffmpeg -f concat -safe 0 -i mylist2.txt -c copy full-video-output.mkv
         
-        echo ${{ secrets.TOKEN_UPLOAD }} | gh auth login --with-token
+        echo "LS 3"
+        ls -lh
         
+        echo ${{ secrets.TOKEN_UPLOAD }} | gh auth login --with-token
         for i in *.mkv; do
           gh release upload renders-${{ needs.prepare-release.outputs.release_tag }} --repo ${{ github.repository }} --clobber $i
         done
