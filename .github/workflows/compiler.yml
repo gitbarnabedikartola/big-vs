@@ -84,6 +84,8 @@ jobs:
     - name: Concat
       shell: bash
       run: |
+        sudo apt update
+        sudo apt install ffmpeg -y
         echo "LS 1"
         ls -lh
       
