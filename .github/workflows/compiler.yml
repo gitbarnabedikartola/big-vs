@@ -14,13 +14,13 @@ jobs:
         uses: nanzm/get-time-action@v1.1
         with:
           format: 'YYYY_MM_DD_HHmm'
-      - name:
+    outputs:
+      release_tag: ${{ steps.time.outputs.time }}
+      - name: create github release
         shell:
         bash: |
           echo ${{ secrets.TOKEN_UPLOAD }} | gh auth login --with-token
           gh release create renders-${{ needs.prepare-release.outputs.release_tag }} --title renders-${{ needs.prepare-release.outputs.release_tag }} --repo ${{ github.repository }} --notes "Renderizações"
-    outputs:
-      release_tag: ${{ steps.time.outputs.time }}
       
   nmatrix:
     runs-on: ubuntu-latest
