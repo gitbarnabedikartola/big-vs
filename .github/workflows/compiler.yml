@@ -7,11 +7,20 @@ env:
   workernumbers: 10
   
 jobs:
+  prepare-release:
+    runs-on: ubuntu-20.04
+    steps:
+      - id: time
+        uses: nanzm/get-time-action@v1.1
+        with:
+          format: 'YYYY_MM_DD_HHmm'
+    outputs:
+      release_tag: ${{ steps.time.outputs.time }}
+      
   nmatrix:
     runs-on: ubuntu-latest
     outputs:
       nmatrix: ${{ steps.set-nmatrix.outputs.Nmatrix }}
-      
     steps:
       - id: set-nmatrix
         run: |
@@ -24,7 +33,7 @@ jobs:
           echo "Nmatrix=[$xxxx]" >> $GITHUB_OUTPUT
 
   make:
-    needs: nmatrix
+    needs: [nmatrix, prepare-release]
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -51,11 +60,26 @@ jobs:
           ls -lh
           # sleep 600
           echo ${{ secrets.TOKEN_UPLOAD }} | gh auth login --with-token
-          # gh release create renders --title renders --repo ${{ github.repository }} --notes "sempre usados"
+          gh release create renders --title renders --repo ${{ github.repository }} --notes "sempre usados"
           for i in *.mkv; do
             gh release upload renders --repo ${{ github.repository }} --clobber $i
           done
-      
+          
+  concat:
+    needs: make
+    runs-on: ubuntu-latest
+    steps:
+    - name: Concat
+        shell: bash
+        run: |
+          
+    
+    
+    
+    
+    
+    
+    
       #   ##Tmate ##
       # - name: Setup TMATE Session
       #   uses: mxschmitt/action-tmate@v3    
