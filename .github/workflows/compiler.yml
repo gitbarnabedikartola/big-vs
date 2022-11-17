@@ -9,18 +9,13 @@ env:
 jobs:
   prepare-release:
     runs-on: ubuntu-20.04
-    outputs:
-      release_tag: ${{ steps.time.outputs.time }}
     steps:
       - id: time
         uses: nanzm/get-time-action@v1.1
         with:
           format: 'YYYY_MM_DD_HHmm'
-      - name: create github release
-        shell:
-        bash: |
-          echo ${{ secrets.TOKEN_UPLOAD }} | gh auth login --with-token
-          gh release create renders-${{ needs.prepare-release.outputs.release_tag }} --title renders-${{ needs.prepare-release.outputs.release_tag }} --repo ${{ github.repository }} --notes "Renderizações"
+    outputs:
+      release_tag: ${{ steps.time.outputs.time }}
       
   nmatrix:
     runs-on: ubuntu-latest
