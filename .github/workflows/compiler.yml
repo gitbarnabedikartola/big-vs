@@ -25,7 +25,7 @@ jobs:
       - name: create github release
         shell: bash
         run: |
-          echo ${{ secrets.TOKEN_UPLOAD }} | gh auth login --with-token
+          # echo ${{ secrets.TOKEN_UPLOAD }} | gh auth login --with-token
           gh release create renders-${{ needs.prepare-release.outputs.release_tag }} --title renders-${{ needs.prepare-release.outputs.release_tag }} --repo ${{ github.repository }} --notes "Renderizações"
           
   nmatrix:
@@ -102,7 +102,7 @@ jobs:
         echo "LS 3"
         ls -lh
         
-        echo ${{ secrets.TOKEN_UPLOAD }} | gh auth login --with-token
+        # echo ${{ secrets.TOKEN_UPLOAD }} | gh auth login --with-token
         for i in *.mkv; do
           gh release upload renders-${{ needs.prepare-release.outputs.release_tag }} --repo ${{ github.repository }} --clobber $i
         done
