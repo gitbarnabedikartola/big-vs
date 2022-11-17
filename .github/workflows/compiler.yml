@@ -80,6 +80,7 @@ jobs:
     needs: make
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v3
     - name: Concat
       shell: bash
       run: |
@@ -87,8 +88,8 @@ jobs:
         ls -lh
       
         mkdir concat
+        gh release view renders-${{ needs.prepare-release.outputs.release_tag }} > concat/renders-tag
         cd concat
-        gh release view renders-${{ needs.prepare-release.outputs.release_tag }} > renders-tag
         download=$(cat renders-tag | grep url | awk '{print $2}' | sed 's/tag/download/')
         for i in $(cat renders-tag | grep asset | awk '{print $2}'); do wget -c ${download}/${i}; done
         
