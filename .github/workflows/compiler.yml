@@ -60,7 +60,7 @@ jobs:
           ls -lh
           # sleep 600
           echo ${{ secrets.TOKEN_UPLOAD }} | gh auth login --with-token
-          gh release create renders-${{ needs.prepare-release.outputs.release_tag }} --title renders-${{ needs.prepare-release.outputs.release_tag }} --repo ${{ github.repository }} --notes "Renderizações"
+          gh release create renders-${{ needs.prepare-release.outputs.release_tag }} --title renders-${{ needs.prepare-release.outputs.release_tag }} --repo ${{ github.repository }} --notes "Renderizações" || echo "release already exists"
           for i in *.mkv; do
             gh release upload renders-${{ needs.prepare-release.outputs.release_tag }} --repo ${{ github.repository }} --clobber $i
           done
