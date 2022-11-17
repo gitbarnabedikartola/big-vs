@@ -9,13 +9,13 @@ env:
 jobs:
   prepare-release:
     runs-on: ubuntu-20.04
+    outputs:
+      release_tag: ${{ steps.time.outputs.time }}
     steps:
       - id: time
         uses: nanzm/get-time-action@v1.1
         with:
           format: 'YYYY_MM_DD_HHmm'
-    outputs:
-      release_tag: ${{ steps.time.outputs.time }}
       - name:
         shell:
         bash: |
