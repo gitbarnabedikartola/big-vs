@@ -17,8 +17,8 @@ jobs:
         with:
           format: 'YYYY_MM_DD_HHmm'
       - name: create github release
-      shell: bash
-      run: |
+        shell: bash
+        run: |
           echo ${{ secrets.TOKEN_UPLOAD }} | gh auth login --with-token
           gh release create renders-${{ needs.prepare-release.outputs.release_tag }} --title renders-${{ needs.prepare-release.outputs.release_tag }} --repo ${{ github.repository }} --notes "Renderizações"
       
