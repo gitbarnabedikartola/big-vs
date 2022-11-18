@@ -117,6 +117,7 @@ runs:
 #         for i in "${listanimacao[@]}"; do
 #           wget -cq https://github.com/gitbarnabedikartola/big-vs/releases/download/render-animacao/$i
 #         done
+        echo ${{ inputs.GH_TOKEN }} | gh auth login --with-token
         gh release view render-animacao > render-animacao/renders-tag
         pushd render-animacao
         download=$(cat renders-tag | grep url | awk '{print $2}' | sed 's/tag/download/')
