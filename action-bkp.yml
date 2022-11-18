@@ -104,22 +104,60 @@ runs:
       shell: bash
       run: |
         #Get Get_Dependencies
-        mkdir render-animacao
-        gh release view render-animacao > render-animacao/renders-tag
-        pushd render-animacao
-        download=$(cat renders-tag | grep url | awk '{print $2}' | sed 's/tag/download/')
-        for i in $(cat renders-tag | grep asset | awk '{print $2}'); do wget -c ${download}/${i}; done
-        ls -lh
-        popd
-
-        mkdir capturas
+        
+#         #render-animação
+#         mkdir render-animacao
+#         listanimacao=(
+#         20min-24fps.mkv
+#         10min-24fps.mkv
+#         59seg-24fps.mkv
+#         pause-dir.mkv
+#         pause-esq.mkv
+#         play-dir.mkv
+#         play-esq.mkv
+#         speedup-dir.mkv
+#         speedup-esq.mkv
+#         )
+#         for i in "${listanimacao[@]}"; do
+#           wget -cq https://github.com/gitbarnabedikartola/big-vs/releases/download/render-animacao/$i
+#         done
+# 
+# 
+#         gh release view render-animacao > render-animacao/renders-tag
+#         pushd render-animacao
+#         download=$(cat renders-tag | grep url | awk '{print $2}' | sed 's/tag/download/')
+#         for i in $(cat renders-tag | grep asset | awk '{print $2}'); do wget -c ${download}/${i}; done
+#         ls -lh
+#         popd
+# 
+# 
+#         
+#        #capturas
+#         listacapturas=(
+#         Mortal-Kombat-2.mp4
+#         $captura
+#         )
+#         for i in "${listacapturas[@]}"; do
+#           wget -cq https://github.com/gitbarnabedikartola/big-vs/releases/download/capturas/$i
+#         done
+# 
+# 
+# 
+        mkdir -p capturas
         gh release view capturas > capturas/renders-tag
         pushd capturas
         download=$(cat renders-tag | grep url | awk '{print $2}' | sed 's/tag/download/')
         for i in $(cat renders-tag | grep asset | awk '{print $2}'); do wget -c ${download}/${i}; done
         ls -lh
         popd
-       
+#         
+#         
+#         
+#         
+#         #upload to github release
+#         #gh release create render-animacao --title render-animacao --repo gitbarnabedikartola/big-vs --notes "animação sempre usadas"
+#         #for i in *.mkv ; do gh release upload render-animacao --repo gitbarnabedikartola/big-vs --clobber $i; done
+#       
     - name: Render
       shell:
       env:
