@@ -1,0 +1,57 @@
+Instalação
+first boot
+
+manjaro base
+sudo pacman -Rs steam --noconfirm
+sudo sed -i 's/ParallelDownloads.*/ParallelDownloads = 3/' /etc/pacman.conf
+sudo pacman -Syu --noconfirm
+sudo pamac install google-chrome --no-confirm
+sudo pacman -Sw steam --noconfirm
+pamac update
+
+
+
+# debian base
+# sudo apt update && sudo apt upgrade -y
+# sudo apt install spice-vdagent -y
+# spice-vdagent
+# wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+# sudo cp google.list /etc/apt/sources.list.d/
+# sudo apt install google-chrome-stable gparted -y
+# sudo apt install --download-only steam -y
+# #firefox libreoffice neofetch steam
+bash arquivo.sh de instalação do ubuntu
+
+
+espaço ocupado (gparted)
+ligar modo performance
+
+
+abrir a loja e instalar steam
+
+abrir e logar na steam
+
+fazer neofetch
+
+
+second boot
+abrir firefox
+abrir chrome
+abrir libre office writer
+abrir steam
+
+copiar arquivos para Download
+desativar o ctrl+H
+
+descompactar arquivo
+#mostrar tamanho do arquivo
+copiar um arquivo grande
+
+mostrar propriedades numero de arquivos
+copiar muitos arquivos pequenos
+numero abrir abas biglinux.com.br
+
+
+
+./local/share/steam 
+btrfs 2.9gb

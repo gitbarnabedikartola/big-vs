@@ -100,15 +100,17 @@ jobs:
         
         for f in ./*.mkv; do echo "file '$f'" >> mylist.txt; done
         cat mylist.txt | awk '{print $2}' | sed s/\'//g | sed 's/^..//' | sort -t'-' -k1 -n | awk '{print "file '\''./"$0"'\''" }' > mylist2.txt
-        ffmpeg -f concat -safe 0 -i mylist2.txt -c copy full-video-output.mkv
+        ffmpeg -f concat -safe 0 -i mylist2.txt -c copy full-video-output-${{ needs.prepare-release.outputs.release_tag }}.mkv
         
         echo "LS 3"
         ls -lh
         
         # echo ${{ secrets.TOKEN_UPLOAD }} | gh auth login --with-token
-        for i in *.mkv; do
-          gh release upload renders-${{ needs.prepare-release.outputs.release_tag }} --repo ${{ github.repository }} --clobber $i
-        done
+        # for i in *.mkv; do
+        #   gh release upload renders-${{ needs.prepare-release.outputs.release_tag }} --repo ${{ github.repository }} --clobber $i
+        # done
+        gh release upload renders-${{ needs.prepare-release.outputs.release_tag }} --repo ${{ github.repository }} --clobber full-video-output-${{ needs.prepare-release.outputs.release_tag }}.mkv
+        
           
       #   ##Tmate ##
       # - name: Setup TMATE Session
