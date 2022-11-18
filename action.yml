@@ -95,6 +95,10 @@ runs:
 #           #echo "startframe"
 #           #echo "endframe"
 #           #echo "Fmake=$fmakex"
+
+     ## Tmate ##
+    - name: Setup TMATE Session
+      uses: mxschmitt/action-tmate@v3
     
     - name: get dependencies
       shell: bash
@@ -185,6 +189,3 @@ runs:
         
         echo ${{ github.repository }}
 #         
-#      # Tmate ##
-#      #- name: Setup TMATE Session
-#      #  uses: mxschmitt/action-tmate@v3
