@@ -1,6 +1,8 @@
 name: 'Compiler Action'
 
 inputs:
+  GH_TOKEN: 
+    required: true
   workernumbers:
     required: true
   workerN:

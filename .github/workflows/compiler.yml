@@ -54,6 +54,7 @@ jobs:
       - name: Make
         uses: gitbarnabedikartola/big-vs@main
         with:
+          GH_TOKEN: $GH_TOKEN
           workernumbers: $workernumbers
           workerN: ${{ matrix.workerN }}
           blenderversion: 3.3.1
