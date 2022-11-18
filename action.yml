@@ -121,16 +121,20 @@ runs:
 #         for i in "${listanimacao[@]}"; do
 #           wget -cq https://github.com/gitbarnabedikartola/big-vs/releases/download/render-animacao/$i
 #         done
-        echo ${{ inputs.GH_TOKEN }} | gh auth login --with-token
-        gh release view render-animacao > render-animacao/renders-tag
-        pushd render-animacao
-        download=$(cat renders-tag | grep url | awk '{print $2}' | sed 's/tag/download/')
-        for i in $(cat renders-tag | grep asset | awk '{print $2}'); do wget -c ${download}/${i}; done
-        ls -lh
-        popd
-        
-        #capturas
-        mkdir -p capturas
+# 
+# 
+#         echo ${{ inputs.GH_TOKEN }} | gh auth login --with-token
+#         gh release view render-animacao > render-animacao/renders-tag
+#         pushd render-animacao
+#         download=$(cat renders-tag | grep url | awk '{print $2}' | sed 's/tag/download/')
+#         for i in $(cat renders-tag | grep asset | awk '{print $2}'); do wget -c ${download}/${i}; done
+#         ls -lh
+#         popd
+# 
+# 
+#         
+#         #capturas
+#         mkdir -p capturas
 #         listacapturas=(
 #         Mortal-Kombat-2.mp4
 #         $captura
@@ -138,17 +142,23 @@ runs:
 #         for i in "${listacapturas[@]}"; do
 #           wget -cq https://github.com/gitbarnabedikartola/big-vs/releases/download/capturas/$i
 #         done
-        gh release view capturas > capturas/renders-tag
-        pushd capturas
-        download=$(cat renders-tag | grep url | awk '{print $2}' | sed 's/tag/download/')
-        for i in $(cat renders-tag | grep asset | awk '{print $2}'); do wget -c ${download}/${i}; done
-        ls -lh
-        popd
-        
-        #upload to github release
-        #gh release create render-animacao --title render-animacao --repo gitbarnabedikartola/big-vs --notes "animação sempre usadas"
-        #for i in *.mkv ; do gh release upload render-animacao --repo gitbarnabedikartola/big-vs --clobber $i; done
-      
+# 
+# 
+# 
+#         gh release view capturas > capturas/renders-tag
+#         pushd capturas
+#         download=$(cat renders-tag | grep url | awk '{print $2}' | sed 's/tag/download/')
+#         for i in $(cat renders-tag | grep asset | awk '{print $2}'); do wget -c ${download}/${i}; done
+#         ls -lh
+#         popd
+#         
+#         
+#         
+#         
+#         #upload to github release
+#         #gh release create render-animacao --title render-animacao --repo gitbarnabedikartola/big-vs --notes "animação sempre usadas"
+#         #for i in *.mkv ; do gh release upload render-animacao --repo gitbarnabedikartola/big-vs --clobber $i; done
+#       
     - name: Render
       shell:
       env:
