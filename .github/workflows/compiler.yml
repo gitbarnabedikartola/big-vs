@@ -91,10 +91,11 @@ jobs:
         ls -lh
       
         mkdir concat
-        gh release view renders-${{ needs.prepare-release.outputs.release_tag }} > concat/renders-tag
+        gh release download renders-${{ needs.prepare-release.outputs.release_tag }} -D concat
+        # gh release view renders-${{ needs.prepare-release.outputs.release_tag }} > concat/renders-tag
         cd concat
-        download=$(cat renders-tag | grep url | awk '{print $2}' | sed 's/tag/download/')
-        for i in $(cat renders-tag | grep asset | awk '{print $2}'); do wget -c ${download}/${i}; done
+        # download=$(cat renders-tag | grep url | awk '{print $2}' | sed 's/tag/download/')
+        # for i in $(cat renders-tag | grep asset | awk '{print $2}'); do wget -c ${download}/${i}; done
         
         echo "LS 2"
         ls -lh
