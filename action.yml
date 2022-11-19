@@ -105,12 +105,12 @@ runs:
       run: |
         #Get Get_Dependencies
         mkdir render-animacao
-        # gh release download render-animacao -D render-animacao
+        gh release download render-animacao -D render-animacao
         # gh release view render-animacao > render-animacao/renders-tag
         # pushd render-animacao
         # download=$(cat renders-tag | grep url | awk '{print $2}' | sed 's/tag/download/')
         # for i in $(cat renders-tag | grep asset | awk '{print $2}'); do wget -c ${download}/${i}; done
-        ls -lh
+        ls -lh render-animacao
         # popd
 
         mkdir capturas
@@ -119,7 +119,7 @@ runs:
         # pushd capturas
         # download=$(cat renders-tag | grep url | awk '{print $2}' | sed 's/tag/download/')
         # for i in $(cat renders-tag | grep asset | awk '{print $2}'); do wget -c ${download}/${i}; done
-        ls -lh
+        ls -lh capturas
         # popd
        
     - name: Render
