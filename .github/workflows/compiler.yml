@@ -78,7 +78,7 @@ jobs:
           done
           
   concat:
-    needs: [make, prepare-release]
+    needs: [make, prepare-release, create-release]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
