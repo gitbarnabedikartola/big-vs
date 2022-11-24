@@ -58,7 +58,7 @@ jobs:
           workernumbers: $workernumbers
           workerN: ${{ matrix.workerN }}
           blenderversion: 3.3.1
-          blenderfile: big-vs-ubuntu.blend
+          blenderfile: big-vs-ubuntu-v2.blend
           #cena a ser renderizada, em branco renderiza a primeira cena
           scene: 03-montagem
           #preencher se quiser renderizar só uma parte, deixar em branco para renderizar os frames do .blend

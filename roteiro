@@ -8,17 +8,15 @@ sudo pacman -Syu --noconfirm
 sudo pamac install google-chrome --no-confirm
 sudo pacman -Sw steam --noconfirm
 pamac update
-
+echo 3 | sudo tee /proc/sys/vm/drop_caches 
 
 
 # debian base
-# sudo apt update && sudo apt upgrade -y
-# sudo apt install spice-vdagent -y
-# spice-vdagent
-# wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-# sudo cp google.list /etc/apt/sources.list.d/
-# sudo apt install google-chrome-stable gparted -y
-# sudo apt install --download-only steam -y
+sudo apt update && sudo apt upgrade -y
+wget -c https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install ./google-chrome-stable_current_amd64.deb -y
+sudo apt install gparted neofetch -y
+sudo apt install --download-only steam -y
 # #firefox libreoffice neofetch steam
 bash arquivo.sh de instalação do ubuntu
 
